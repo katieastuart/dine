@@ -16,5 +16,9 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  // Get restaurant information
+  google: function(userLocation) {
+    return axios.post("/api/books/google", userLocation)
   }
 };

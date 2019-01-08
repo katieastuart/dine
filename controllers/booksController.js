@@ -1,4 +1,5 @@
 const db = require("../models");
+const axios = require("axios");
 
 // Defining methods for the booksController
 module.exports = {
@@ -33,5 +34,13 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  google: function(req, res) {
+    axios({
+      method: "GET",
+      url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${req.body.foodType}&opennow&minprice=${req.body.minPrice}&maxprice=${req.body.maxPrice}&location=${req.body.latitude},${req.body.longitude}&radius=${req.body.distance}&key=`
+    }).then(function (response) {
+      res.json(response.data.results)
+    })
   }
 };
