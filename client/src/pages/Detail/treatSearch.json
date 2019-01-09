@@ -1,0 +1,43 @@
+[
+    {
+        "id": "1",
+        "name": "Icecream",
+        "category": "ice+cream",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "2",
+        "name": "Cheese Cake",
+        "category": "cheese+cake",
+        "image": "https://www.tacobell.com/medias/CLS-NotSure-Groups.jpg?context=bWFzdGVyfHJvb3R8NTI3NjZ8aW1hZ2UvanBlZ3xoNWIvaGYyLzg4MDY3NjM3MjQ4MzAuanBnfDc4YTNhMzI1ZTcwNGVhMWRiNzlkMGQxOTcwNWMxMjI5ZjRjMDIwZmM4NDEwNGQwYjdiMzI4M2ZhNDg5YTc5MTY"
+    },
+
+    {
+        "id": "3",
+        "name": "Bakery Treats",
+        "category": "bakery",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "4",
+        "name": "Smoothie",
+        "category": "smoothie",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "5",
+        "name": "Cookies",
+        "category": "cookie",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "6",
+        "name": "Soda",
+        "category": "soda",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    }
+]
