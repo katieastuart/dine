@@ -1,0 +1,43 @@
+[
+    {
+        "id": "1",
+        "name": "Pizza",
+        "category": "pizza",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "2",
+        "name": "Mexican Food",
+        "category": "mexican+food",
+        "image": "https://www.tacobell.com/medias/CLS-NotSure-Groups.jpg?context=bWFzdGVyfHJvb3R8NTI3NjZ8aW1hZ2UvanBlZ3xoNWIvaGYyLzg4MDY3NjM3MjQ4MzAuanBnfDc4YTNhMzI1ZTcwNGVhMWRiNzlkMGQxOTcwNWMxMjI5ZjRjMDIwZmM4NDEwNGQwYjdiMzI4M2ZhNDg5YTc5MTY"
+    },
+
+    {
+        "id": "3",
+        "name": "Asain Food",
+        "category": "asain+food",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "4",
+        "name": "American Food",
+        "category": "american+food",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "5",
+        "name": "Italian Food",
+        "category": "italian+food",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    },
+
+    {
+        "id": "6",
+        "name": "Salad and Sandwiches",
+        "category": "salad+sandwiches",
+        "image": "https://pixel.nymag.com/imgs/fashion/daily/2018/11/01/1-mandarin-duck-central-park.w700.h700.jpg"
+    }
+]
