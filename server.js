@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 var syncOptions = {
-  force: true
+  force: false
 };
 
 // If running a test, set syncOptions.force to true

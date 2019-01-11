@@ -8,7 +8,7 @@ import foodSearch from "./foodSearch.json"
 import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-class Detail extends Component {
+class Search extends Component {
   state = {
     index: 0,
     searchSelection: treatSearch,
@@ -47,7 +47,7 @@ class Detail extends Component {
         alert("Geolocation is not supported by this browser")
     }
     
-  }
+  } 
 
   handleInputChange = (event) => {
     let value = event.target.value;
@@ -192,4 +192,4 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+export default Search;
