@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const booksController = require("../../controllers/booksController");
+const Controller = require("../../controllers/controller.js");
 
 // Matches with "/api/books"
 router.route("/")
@@ -7,7 +7,7 @@ router.route("/")
   // .post(booksController.create);
 
 router.route("/google")
-  .post(booksController.google)
+  .post(Controller.google)
   
 // Matches with "/api/books/:id"
 router

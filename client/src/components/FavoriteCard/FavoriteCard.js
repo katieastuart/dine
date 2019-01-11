@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardColumns,
- CardSubtitle, CardBody } from 'reactstrap';
+import { Card, Button, CardImg, CardTitle, CardColumns, CardBody } from 'reactstrap';
 
 const Example = (props) => {
   return (

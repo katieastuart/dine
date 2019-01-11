@@ -1,35 +1,31 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
 import { Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
 import Input from "../../components/Form";
 
-class Books extends Component {
+class Profile extends Component {
   state = {
-    books: [],
+    profile: [],
     title: "",
     author: "",
     synopsis: ""
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadProfile();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadProfile = () => {
+    API.getProfile()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ profile: res.data, title: "", author: "", synopsis: "" })
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
+  deleteProfile = id => {
+    API.deleteProfile(id)
+      .then(res => this.loadProfile())
       .catch(err => console.log(err));
   };
 
@@ -43,12 +39,12 @@ class Books extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.title && this.state.author) {
-      API.saveBook({
+      API.saveProfile({
         title: this.state.title,
         author: this.state.author,
         synopsis: this.state.synopsis
       })
-        .then(res => this.loadBooks())
+        .then(res => this.loadProfile())
         .catch(err => console.log(err));
     }
   };
@@ -76,7 +72,7 @@ class Books extends Component {
                 disabled={!(this.state.author && this.state.title)}
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Submit Profile
               </FormBtn> */}
 
       </Container>
@@ -84,4 +80,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Profile;
