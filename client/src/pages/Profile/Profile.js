@@ -5,22 +5,26 @@ import Input from "../../components/Form";
 import SignUpForm from "../../components/SignUpForm"
 
 class Profile extends Component {
-  state = {
-    newUser: false
-  }
+  // state = {
+  //   newUser: true
+  // }
 
   render() {
-    if(!this.state.newUser) {
-      return (
-      <Container>
-        <SignUpForm />
-      </Container>
-      )
+    // if(!this.state.newUser) {
+    //   return (
+    //   <Container>
+    //     <SignUpForm />
+    //   </Container>
+    //   )
 
-    }
+    // }
     return (
       <Container>
         <h1>dine</h1>
+        <Container>
+          <SignUpForm />
+        </Container>
+
         <Input />
         {/* <Input
                 value={this.state.author}
