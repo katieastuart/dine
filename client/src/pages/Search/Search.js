@@ -24,10 +24,12 @@ class Search extends Component {
     maxPrice: "4",
     redirect: false,
     initialQuestions: false,
+    loggedIn: this.props.location.state.loggedIn,
     modal: false
   };
-
+ 
   componentDidMount = () => {
+
     var storeLocation = (userLocationInformation) => {
         var userLatitude = userLocationInformation.coords.latitude;
         var userLongitude = userLocationInformation.coords.longitude;
@@ -129,6 +131,10 @@ class Search extends Component {
     }
   
     render() {
+      if(!this.state.loggedIn){
+        return <Redirect to="/"/>
+      }
+
       if(!this.state.initialQuestions) {
         return (
           <Container>
