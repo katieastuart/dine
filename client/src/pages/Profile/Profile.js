@@ -21,10 +21,9 @@ class Profile extends Component {
     return (
       <Container>
         <h1>dine</h1>
-        <Container>
+        
           <SignUpForm />
-        </Container>
-
+      
         <Input />
         {/* <Input
                 value={this.state.author}
