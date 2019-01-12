@@ -1,18 +1,13 @@
-// import React from "react";
-
-// const Nav = () => (
-//   <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-//     <a className="navbar-brand" href="/">
-//       React Reading List
-//     </a>
-//   </nav>
-// );
-
-// export default Nav;
-
-
-import React from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import React from "react";
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink
+} from "reactstrap";
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -33,7 +28,9 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar color="faded" light>
-          <NavbarBrand href="/" className="mr-auto">dine</NavbarBrand>
+          <NavbarBrand href="/" className="mr-auto">
+            dine
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
