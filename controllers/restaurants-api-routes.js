@@ -1,8 +1,7 @@
 var db = require("../models");
 
-module.exports = function(app) {
-  // add a new restaurant
-  app.post("/api/restaurants", function(req, res) {
+module.exports = {
+  addRestaurant: function(req, res) {
     console.log(req.session)
     res.send(200);
     db.Restaurants.findAll({
@@ -32,5 +31,5 @@ module.exports = function(app) {
         });
       }
     })
-  });
-  };
+  }
+}

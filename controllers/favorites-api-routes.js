@@ -1,8 +1,8 @@
 var db = require("../models");
 
-module.exports = function(app) {
+module.exports = {
   //select all favorites for a user
-  app.get("/api/favorites/:id", function(req, res) {
+  findAll: function(req, res) {
     db.Users.findAll({
       include: [
         {
@@ -16,10 +16,9 @@ module.exports = function(app) {
     }).then(function(dbExamples) {
       res.json(dbExamples);
     });
-  });
-
+  },
   //select all favorites for a user by type
-  app.get("/api/favorites/:type/:id", function(req, res) {
+  findAllType: function(req, res) {
     db.Users.findAll({
       include: [
         {
@@ -36,10 +35,9 @@ module.exports = function(app) {
     }).then(function(dbRes) {
       res.json(dbRes);
     });
-  });
-
+  },
   //add new favorite
-  app.post("/api/restaurants/:id", function(req, res) {
+  addFavorite: function(req, res) {
     db.Restaurants.findAll({
       where: {
         id: req.params.id
@@ -55,10 +53,9 @@ module.exports = function(app) {
       console.log(req.session.user.id);
       console.log(dbRes[0].dataValues.id);
     });
-  });
-
-  //delete a favorite for a user - NOT WORKING YET NEED TEST DATA
-  app.delete("/api/favorites/:id", function(req, res) {
+  },
+  //delete a favorite for a user
+  deleteFavorite: function(req, res) {
     db.Favorites.destroy({
       where: {
         id: req.params.id
@@ -66,5 +63,6 @@ module.exports = function(app) {
     }).then(function(dbRes) {
       res.json(dbRes);
     });
-  });
-};
+  }
+}
+
