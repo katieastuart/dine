@@ -26,7 +26,7 @@ module.exports = {
           req.session.user = userObj;
           req.session.user.loggedIn = true;
 
-          res.json(req.session.user);
+          res.json(userObj);
         });
       });
     });
@@ -90,7 +90,7 @@ module.exports = {
               req.session.user.loggedIn = true;
 
               console.log(dbData.dataValues)
-              res.status(200).send('Successful login')
+              res.status(200).json(userObj)
             }
           });
         }

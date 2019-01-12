@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import FavoriteCard from "../../components/FavoriteCard";
 import { Container } from "../../components/Grid";
+import API from "../../utils/API";
 
-class Detail extends Component {
+class Favorite extends Component {
  
 
   render() {
@@ -15,4 +16,4 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+export default Favorite;

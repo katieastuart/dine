@@ -24,15 +24,19 @@ class Search extends Component {
     maxPrice: "4",
     redirect: false,
     initialQuestions: false,
+    loggedIn: this.props.location.state.loggedIn,
     modal: false
   };
-
+ 
   componentDidMount = () => {
-    var storeLocation = userLocationInformation => {
-      var userLatitude = userLocationInformation.coords.latitude;
-      var userLongitude = userLocationInformation.coords.longitude;
-      this.setState({ latitude: userLatitude, longitude: userLongitude });
-    };
+
+
+    var storeLocation = (userLocationInformation) => {
+        var userLatitude = userLocationInformation.coords.latitude;
+        var userLongitude = userLocationInformation.coords.longitude;
+        this.setState({latitude: userLatitude, longitude: userLongitude }) 
+      
+    }
 
     var errors = errorInformation => {
       if (errorInformation) {
@@ -123,9 +127,70 @@ class Search extends Component {
           index: this.state.index + 1,
           searchSelection: foodSearch[this.state.index + 1]
         });
+
+        API.addRestaurant().then(res => console.log(res.data))
+      }
+
+      if (this.state.index < 5) {
+        if (this.state.searchSelection === treatSearch[this.state.index] ) {
+          this.setState({
+            index: this.state.index + 1,
+            searchSelection: treatSearch[this.state.index + 1]
+          });
+        } else {
+          this.setState({
+            index: this.state.index + 1,
+            searchSelection: foodSearch[this.state.index + 1]
+          });
+        }
       }
     }
-  };
+  
+    render() {
+      if(!this.state.loggedIn){
+        return <Redirect to="/"/>
+      }
+
+      if(!this.state.initialQuestions) {
+        return (
+          <Container>
+            <Form>
+
+              <FormGroup row>
+                <Label sm={2}>set distance 1000-50000</Label>
+                <Col sm={10}>
+                  <Input onChange={this.handleInputChange} value={this.state.distance} name="distance" type="text" />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Label sm={2}>set minPrice 0-4</Label>
+                <Col sm={10}>
+                  <Input onChange={this.handleInputChange} value={this.state.minPrice} name="minPrice" type="text" />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Label sm={2}>set maxPrice 0-4</Label>
+                <Col sm={10}>
+                  <Input onChange={this.handleInputChange} value={this.state.maxPrice} name="maxPrice" type="text" />
+                </Col>
+              </FormGroup>
+
+              <FormGroup row>
+                <Col sm={10}>
+                <p>Please select treat or food</p>
+                <Button onClick={this.setTreat}>treat</Button>
+                <Button onClick={this.setFood}>food</Button>
+                </Col>
+              </FormGroup>
+             
+              <Button onClick={this.handleFormSubmit}>submit</Button>
+            </Form>
+          </Container>
+        );
+      }
+
 
   render() {
     if (!this.state.initialQuestions) {

@@ -18,17 +18,4 @@ module.exports = {
       res.json(response.data.results);
     });
   }
-  // ,
-  // addRestaurants: function(req,res) {
-  //   axios({
-  //     method: "POST",
-  //     url: "/api/restaurants",
-  //     data: {
-  //       type: typeOfFoodToSearch,
-  //       name: results[i].name,
-  //       address: results[i].formatted_address,
-  //       placeId: results[i].place_id
-  //   }
-  //   })
-  // }
 };
