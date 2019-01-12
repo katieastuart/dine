@@ -2,12 +2,29 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Container } from "../../components/Grid";
 import Input from "../../components/Form";
+import SignUpForm from "../../components/SignUpForm"
 
 class Profile extends Component {
+  // state = {
+  //   newUser: true
+  // }
+
   render() {
+    // if(!this.state.newUser) {
+    //   return (
+    //   <Container>
+    //     <SignUpForm />
+    //   </Container>
+    //   )
+
+    // }
     return (
-      <Container fluid>
+      <Container>
         <h1>dine</h1>
+        <Container>
+          <SignUpForm />
+        </Container>
+
         <Input />
         {/* <Input
                 value={this.state.author}

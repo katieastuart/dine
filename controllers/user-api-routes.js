@@ -1,16 +1,14 @@
 var db = require("../models");
 var bcrypt = require('bcrypt');
 
-module.exports = function (app) {
-  // Get all examples
-  app.get("/api/users", function (req, res) {
+
+module.exports = {
+  getAllUsers: function (req, res) {
     db.Users.findAll({}).then(function (dbRes) {
       res.json(dbRes);
     });
-  });
-
-  // Create a new USER
-  app.post("/api/users", function (req, res) {
+  },
+  createNewUser: function (req, res) {
     console.log(req.body)
     //to store a hased password into the database we need to first salt our password. this will tell bcrypt how many time to pass through the users password to generate the hash
     bcrypt.genSalt(10, function (err, salt) {
@@ -32,10 +30,8 @@ module.exports = function (app) {
         });
       });
     });
-  });
-
-  // Delete an example by id
-  app.delete("/api/users/:id", function (req, res) {
+  },
+  deleteUser: function (req, res) {
     db.Users.destroy({
       where: {
         id: req.params.id
@@ -43,17 +39,13 @@ module.exports = function (app) {
     }).then(function (dbRes) {
       res.json(dbRes);
     });
-  });
-
-  //logout routes
-  app.get('/api/logout', function (req, res) {
+  },
+  logout: function (req, res) {
     req.session.user = {}
     req.session.user.loggedIn = false;
     res.send('youve logged out')
-  })
-
-  //login endpoint
-  app.post("/api/login", function (req, res) {
+  },
+  login: function (req, res) {
     //will show our user data from front end
     console.log(req.body)
     //will see the currently formatted session object with user data
@@ -103,12 +95,10 @@ module.exports = function (app) {
           });
         }
       });
-  })
-
-  //get user info endpoint via query params
-  app.get('/api/profile/:email', function (req, res, next) {
-    console.log(req.param);
-    db.users.findOne({
+  },
+  getUserByEmail: function (req, res, next) {
+    // console.log(req.param);
+    db.Users.findOne({
       where: {
         email: req.params.email
       }
@@ -124,32 +114,37 @@ module.exports = function (app) {
       req.session.user = userObj;
       res.json(userObj)
     })
-  });
-
-  //update profile route
-  app.put('/api/update/:email', function (req, res, next) {
+  },
+  updateUserByEmail: function (req, res, next) {
+    console.log(req.params.email);
     var loggedUser = req.session.user.loggedIn;
     req.session.user = req.body
     if (loggedUser) {
-      db.users.update({
-        id: dbData.dataValues.id,
-        first_name: dbData.dataValues.first_name,
-        last_name: dbData.dataValues.last_name,
-        email: dbData.dataValues.email
+      db.Users.update({
+        first_name: (req.body.first_name != "" ? req.body.first_name : req.session.user.first_name),
+        last_name: (req.body.last_name != "" ? req.body.last_name : req.session.user.last_name),
+        email: (req.body.email != "" ? req.body.email : req.session.user.email)
       }, {
         where: {
           email: req.params.email
         }
       }).then(function (dbData) {
-        res.json(dbData.dataValues)
+        var userObj = {
+          id: dbData.dataValues.id,
+          first_name: dbData.dataValues.first_name,
+          last_name: dbData.dataValues.last_name,
+          email: dbData.dataValues.email
+        }
+        req.session.user.loggedIn = true;
+        req.session.user = userObj;
+        res.json(userObj)
       })
     } else {
       res.status(404).json("please log in to update profile")
     }
-  });
-
-  //endpoint for grabbing session user object to be used accrossed entire app.
-  app.get("/api/session", function (req, res, next) {
+  },
+  session: function (req, res, next) {
     console.log(req.session.user.id)
-  });
-};
+    res.json(req.session.user)
+  }
+}

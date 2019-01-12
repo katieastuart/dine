@@ -168,9 +168,11 @@ class Search extends Component {
           </Container>
         );
       }
+
       if(this.state.redirect){
         return <Redirect to="/results"/>
       }
+      
       return (
         <Container>
           <Modal />
