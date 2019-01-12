@@ -113,6 +113,7 @@ class Search extends Component {
         this.setState({
           redirect: true
         });
+        API.addRestaurant().then(res => console.log(res.data))
       }
 
       if (this.state.index < 5) {
