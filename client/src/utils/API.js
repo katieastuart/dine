@@ -32,5 +32,16 @@ export default {
   // Delete last search results for a user
   findAllResults: function(id) {
     return axios.delete("/api/last-search/" + id)
+  },
+  session: function() {
+    return axios.get("/api/users/session")
+  },
+
+  login: function(userLoginInformation) {
+    return axios.post("/api/users/login", userLoginInformation)
+  },
+
+  signup: function(userSignupInformation) {
+    return axios.post("/api/users", userSignupInformation)
   }
 };
