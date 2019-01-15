@@ -1,50 +1,44 @@
 import React from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
+import { Link } from "react-router-dom";
 
 export default class Example extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
+  state = {
+    collapsed: true
   }
 
-  toggleNavbar() {
+  toggleNavbar = () => {
     this.setState({
       collapsed: !this.state.collapsed
     });
   }
+
   render() {
     return (
       <div>
         <Navbar color="faded" light>
-          <NavbarBrand href="/" className="mr-auto">
-            dine
-          </NavbarBrand>
+        
+          <Nav navbar>
+            <NavItem>
+              <Link className="nav-link" to="/">dine<span className="sr-only">(current)</span></Link>
+            </NavItem>
+          </Nav>
+
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
-                <NavLink href="/search/">New Search</NavLink>
+                <Link className="nav-link" to="/search">Search<span className="sr-only">(current)</span></Link>
               </NavItem>
               <NavItem>
-                <NavLink href="/results/">Last Search</NavLink>
+                <Link className="nav-link" to="/results">Results<span className="sr-only">(current)</span></Link>
               </NavItem>
               <NavItem>
-                <NavLink href="/favorites/">Favorites</NavLink>
+                <Link className="nav-link" to="/favorites">Favorites<span className="sr-only">(current)</span></Link>
               </NavItem>
               <NavItem>
-                <NavLink href="/components/">Log Out</NavLink>
+                <Link className="nav-link" to="/logout">Log Out<span className="sr-only">(current)</span></Link>
               </NavItem>
             </Nav>
           </Collapse>
