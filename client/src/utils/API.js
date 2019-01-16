@@ -30,9 +30,10 @@ export default {
     return axios.get("/api/last-search/" + id)
   },
   // Delete last search results for a user
-  findAllResults: function(id) {
-    return axios.delete("/api/last-search/" + id)
-  },
+  // ************************ Need to have a different name for this function. Cannot be the same as the one above it**************************
+  // findAllResults: function(id) {
+  //   return axios.delete("/api/last-search/" + id)
+  // },
   session: function() {
     return axios.get("/api/users/session")
   },
