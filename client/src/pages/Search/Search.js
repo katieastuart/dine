@@ -9,6 +9,7 @@ import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import { MyContext } from '../../App';
 
+var timerId = null;
 
 class Search extends Component {
   state = {
@@ -28,24 +29,31 @@ class Search extends Component {
   };
 
   componentDidMount = () => {
-    var storeLocation = userLocationInformation => {
-      var userLatitude = userLocationInformation.coords.latitude;
-      var userLongitude = userLocationInformation.coords.longitude;
-      this.setState({ latitude: userLatitude, longitude: userLongitude });
-    };
 
-    var errors = errorInformation => {
-      if (errorInformation) {
-        alert("please allow location information to use website");
+    timerId = setTimeout(()=>{
+        var storeLocation = userLocationInformation => {
+        var userLatitude = userLocationInformation.coords.latitude;
+        var userLongitude = userLocationInformation.coords.longitude;
+        this.setState({ latitude: userLatitude, longitude: userLongitude });
+      };
+
+      var errors = errorInformation => {
+        if (errorInformation) {
+          alert("please allow location information to use website");
+        }
+      };
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(storeLocation, errors);
+      } else {
+        alert("Geolocation is not supported by this browser");
       }
-    };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(storeLocation, errors);
-    } else {
-      alert("Geolocation is not supported by this browser");
-    }
+    }, 500)
+  
   };
+  componentWillUnmount() {
+    clearTimeout(timerId)
+  }
 
   handleInputChange = event => {
     let value = event.target.value;
