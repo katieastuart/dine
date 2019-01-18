@@ -3,6 +3,7 @@ import { Card, Button, CardImg, CardTitle, CardColumns, CardBody } from 'reactst
 import { Container } from "../../components/Grid";
 import {Redirect} from 'react-router-dom';
 import { MyContext } from '../../App';
+import API from "../../utils/API";
 
 class Favorite extends Component {
   state = {

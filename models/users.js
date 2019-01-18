@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
   
     Users.associate = function(models) {
       Users.belongsToMany(models.Restaurants, {
-        as: "user_favorite",
+        as: "user_favorite", // used for querying data
         through: models.Favorites,
         foreignKey: "user_id"
       });
