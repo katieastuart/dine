@@ -10,6 +10,9 @@ import { Redirect } from "react-router-dom";
 import "react-input-range/lib/css/index.css";
 import InputRange from "react-input-range";
 import "../../components/RangeSlider/RangeSlider.css";
+import { MyContext } from '../../App';
+
+var timerId = null;
 
 class Search extends Component {
   state = {
@@ -17,39 +20,43 @@ class Search extends Component {
     searchSelection: treatSearch,
     latitude: "",
     longitude: "",
-    // foodType: "",
     // max distance is 50000.
     distance: "1000",
     // 0 is the most affortable and lowest option.
     minPrice: "0",
     // 4 is the most expensive and the hightest option.
-    // search needs to be minprice 0 and maxprice 1. Can't be minprice 0 and maxprice 0 because if there are no 0 ratings in search. No results will be displayed.
     maxPrice: "4",
     redirect: false,
     initialQuestions: false,
-    loggedIn: this.props.location.state.loggedIn,
     modal: false
   };
 
   componentDidMount = () => {
-    var storeLocation = userLocationInformation => {
-      var userLatitude = userLocationInformation.coords.latitude;
-      var userLongitude = userLocationInformation.coords.longitude;
-      this.setState({ latitude: userLatitude, longitude: userLongitude });
-    };
 
-    var errors = errorInformation => {
-      if (errorInformation) {
-        alert("please allow location information to use website");
+    timerId = setTimeout(()=>{
+        var storeLocation = userLocationInformation => {
+        var userLatitude = userLocationInformation.coords.latitude;
+        var userLongitude = userLocationInformation.coords.longitude;
+        this.setState({ latitude: userLatitude, longitude: userLongitude });
+      };
+
+      var errors = errorInformation => {
+        if (errorInformation) {
+          alert("please allow location information to use website");
+        }
+      };
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(storeLocation, errors);
+      } else {
+        alert("Geolocation is not supported by this browser");
       }
-    };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(storeLocation, errors);
-    } else {
-      alert("Geolocation is not supported by this browser");
-    }
+    }, 500)
+  
   };
+  componentWillUnmount() {
+    clearTimeout(timerId)
+  }
 
   handleInputChange = event => {
     let value = event.target.value;
@@ -60,32 +67,19 @@ class Search extends Component {
     });
   };
 
-  handleFormSubmit = event => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-
-    this.setState({
-      initialQuestions: true
-    });
-  };
-
-  setFood = event => {
-    event.preventDefault();
-
-    this.setState({
-      searchSelection: foodSearch[this.state.index]
-    });
-
-    this.handleFormSubmit();
-  };
-
-  setTreat = event => {
-    event.preventDefault();
-
-    this.setState({
-      searchSelection: treatSearch[this.state.index]
-    });
-    this.handleFormSubmit();
-  };
+  setTreatOrFood = (event) => {
+    if (event.target.value === "treat") {
+      this.setState({
+        searchSelection: treatSearch[this.state.index],
+        initialQuestions: true
+      })
+    } else {
+      this.setState({
+        searchSelection: foodSearch[this.state.index],
+        initialQuestions: true
+      })
+    }
+  }
 
   incrementIndex = () => {
     if (this.state.index === 5) {
@@ -107,36 +101,37 @@ class Search extends Component {
     }
   };
 
+  addRestaurantData = (res) => {
+    console.log(res)
+    for (var i = 0; i < 5; i++) {
+      API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
+      
+    }
+  }
+
   googleAPICall = () => {
     console.log(this.state.searchSelection);
-    API.google(this.state).then(res => console.log(res.data));
+    API.google(this.state).then(res => this.addRestaurantData(res.data));
 
-    if (this.state.index === 5) {
-      this.setState({
-        redirect: true
-      });
-    }
-
-    if (this.state.index < 5) {
-      if (this.state.searchSelection === treatSearch[this.state.index]) {
-        this.setState({
-          index: this.state.index + 1,
-          searchSelection: treatSearch[this.state.index + 1]
-        });
-      } else {
-        this.setState({
-          index: this.state.index + 1,
-          searchSelection: foodSearch[this.state.index + 1]
-        });
-      }
-    }
+    this.incrementIndex()
   };
 
   render() {
-    if (!this.state.loggedIn) {
-      return <Redirect to="/" />;
-    }
-    if (!this.state.initialQuestions) {
+
+    return(
+      <MyContext.Consumer>
+        {(context) => {
+
+        if (!context.state.loggedIn) {
+          return <Redirect to="/" />;
+        }
+        
+        if (this.state.redirect) {
+          return <Redirect to="/results" />;
+        }
+
+
+        if (!this.state.initialQuestions) {
       return (
         <Container>
           <div class="container">
@@ -217,37 +212,41 @@ class Search extends Component {
         </Container>
       );
     }
+    
+        return (
+          <Container>
+            <Modal />
+    
+            {
+              <Card>
+                <h1 style={{ background: "pink" }} draggable="true">
+                  {this.state.searchSelection.name}
+                </h1>
+                <CardImg
+                  id="foodCardType"
+                  className="foodCard"
+                  top
+                  width="100%"
+                  src={this.state.searchSelection.image}
+                  alt={this.state.searchSelection.name}
+                  value={this.state.searchSelection.name}
+                />
+    
+                <CardBody>
+                  <Button 
+                    value={this.state.searchSelection.name}
+                    onClick={this.googleAPICall}>Yes</Button>
+                  <Button onClick={this.incrementIndex}>No</Button>
+                </CardBody>
+              </Card>
+            }
+          </Container>
+        );
+        }}
 
-    if (this.state.redirect) {
-      return <Redirect to="/results" />;
-    }
+      </MyContext.Consumer>
 
-    return (
-      <Container>
-        <Modal />
-
-        {
-          <Card>
-            <h1 style={{ background: "pink" }} draggable="true">
-              {this.state.searchSelection.name}
-            </h1>
-            <CardImg
-              className="foodCard"
-              top
-              width="100%"
-              src={this.state.searchSelection.image}
-              alt="Card image cap"
-              draggable="true"
-            />
-
-            <CardBody>
-              <Button onClick={this.googleAPICall}>Yes</Button>
-              <Button onClick={this.incrementIndex}>No</Button>
-            </CardBody>
-          </Card>
-        }
-      </Container>
-    );
+    )
   }
 }
 

@@ -40,7 +40,7 @@ module.exports = {
   addFavorite: function(req, res) {
     db.Restaurants.findAll({
       where: {
-        id: req.params.id
+        id: req.session.user.id
       }
     }).then(function(dbRes) {
       db.Favorites.create({

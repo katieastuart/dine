@@ -4,6 +4,9 @@ module.exports = function(sequelize, DataTypes) {
     restaurant_type: DataTypes.STRING,
     restaurant_address: DataTypes.STRING,
     restaurant_place_id: DataTypes.STRING,
+    restaurant_rating: DataTypes.STRING,
+    restaurant_price_level: DataTypes.STRING,
+    restaurant_photo_reference: DataTypes.STRING(1000),
   });
 
   Restaurants.associate = function(models) {
