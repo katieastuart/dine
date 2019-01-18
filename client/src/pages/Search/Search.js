@@ -98,9 +98,17 @@ class Search extends Component {
     }
   };
 
+  addRestaurantData = (res) => {
+    console.log(res)
+    for (var i = 0; i < 5; i++) {
+      API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
+      
+    }
+  }
+
   googleAPICall = () => {
     console.log(this.state.searchSelection);
-    API.google(this.state).then(res => console.log(res.data));
+    API.google(this.state).then(res => this.addRestaurantData(res.data));
 
     this.incrementIndex()
   };
@@ -117,6 +125,7 @@ class Search extends Component {
         if (this.state.redirect) {
           return <Redirect to="/results" />;
         }
+
 
         if (!this.state.initialQuestions) {
           return (
@@ -166,16 +175,19 @@ class Search extends Component {
                   {this.state.searchSelection.name}
                 </h1>
                 <CardImg
+                  id="foodCardType"
                   className="foodCard"
                   top
                   width="100%"
                   src={this.state.searchSelection.image}
-                  alt="Card image cap"
-                  draggable="true"
+                  alt={this.state.searchSelection.name}
+                  value={this.state.searchSelection.name}
                 />
     
                 <CardBody>
-                  <Button onClick={this.googleAPICall}>Yes</Button>
+                  <Button 
+                    value={this.state.searchSelection.name}
+                    onClick={this.googleAPICall}>Yes</Button>
                   <Button onClick={this.incrementIndex}>No</Button>
                 </CardBody>
               </Card>

@@ -3,6 +3,7 @@ const favoritesController = require("../../controllers/favorites-api-routes");
 
 
 router.route("/")
+.post(favoritesController.addFavorite)
 
 //select all favorites for a user
 router.route("/:id")
