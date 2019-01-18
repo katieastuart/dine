@@ -24,8 +24,8 @@ class Results extends Component {
       .catch(err => console.log(err));
   };
 
-  favoriteRestaurant = () => {
-    API.addFavorite()
+  favoriteRestaurant = (id) => {
+    API.addFavorite(id)
   };
 
   render() {
@@ -50,7 +50,7 @@ class Results extends Component {
                     <p>Rating: {restaurant.restaurant_rating}</p>
                     <p>Price level: {restaurant.restaurant_price_level}</p>
                     <a href={"https://www.google.com/maps/dir//" + restaurant.restaurant_address} target="_blank"><Button>Directions</Button></a>
-                    <Button onClick={this.favoriteRestaurant}>Favorite</Button>
+                    <Button onClick={()=>{this.favoriteRestaurant(restaurant.id)}}>Favorite</Button>
                   </Media>
                 </Media>
                ))}

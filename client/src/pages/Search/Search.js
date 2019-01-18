@@ -21,11 +21,11 @@ class Search extends Component {
     latitude: "",
     longitude: "",
     // max distance is 50000.
-    distance: "1000",
+    distance: 1000,
     // 0 is the most affortable and lowest option.
-    minPrice: "0",
+    minPrice: 0,
     // 4 is the most expensive and the hightest option.
-    maxPrice: "4",
+    maxPrice: 4,
     redirect: false,
     initialQuestions: false,
     modal: false
@@ -103,15 +103,19 @@ class Search extends Component {
 
   addRestaurantData = (res) => {
     console.log(res)
-    for (var i = 0; i < 5; i++) {
-      API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
-      
+    if(res.response.length > 0) {
+      for (var i = 0; i < 5; i++) {
+        if(res.response[i] !== undefined) {
+            API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
+          }
+        }
     }
   }
 
   googleAPICall = () => {
     console.log(this.state.searchSelection);
     API.google(this.state).then(res => this.addRestaurantData(res.data));
+    // API.google(this.state).then(res => console.log(res.data.response));
 
     this.incrementIndex()
   };
@@ -134,7 +138,7 @@ class Search extends Component {
         if (!this.state.initialQuestions) {
       return (
         <Container>
-          <div class="container">
+          <div className="container">
             <InputRange
               className="rangeSlider"
               step={1000}
@@ -201,11 +205,11 @@ class Search extends Component {
             <FormGroup row>
               <Col sm={10}>
                 <p>Please select treat or food</p>
-                <Button onClick={this.setTreat}>
+                <Button onClick={this.setTreatOrFood} value={"treat"}>
                   treat
                   {/* <img src="../../images/ice-cream.png" /> */}
                 </Button>
-                <Button onClick={this.setFood}>food</Button>
+                <Button onClick={this.setTreatOrFood} value={"food"}>food</Button>
               </Col>
             </FormGroup>
           </Form>

@@ -15,7 +15,9 @@ export default {
   },
   // Add a new favorite
   addFavorite: function(id) {
-    return axios.post("/api/favorites")
+    return axios.post("/api/favorites", {
+      id
+    })
   },
   // Delete a favorite
   deleteFavorite: function(id) {
