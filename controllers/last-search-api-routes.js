@@ -14,6 +14,7 @@ module.exports = {
       }
     }).then(function(dbExamples) {
       res.json(dbExamples);
+      console.log({dbExamples})
     });
   },
   deleteLastSearch: function(req, res) {
