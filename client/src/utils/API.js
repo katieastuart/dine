@@ -42,6 +42,7 @@ export default {
   deleteLastResults: function(id) {
     return axios.delete("/api/last-search/" + id)
   },
+
   session: function() {
     return axios.get("/api/users/session")
   },
