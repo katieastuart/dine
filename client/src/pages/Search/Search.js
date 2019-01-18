@@ -7,6 +7,9 @@ import treatSearch from "./treatSearch.json";
 import foodSearch from "./foodSearch.json";
 import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
+import "react-input-range/lib/css/index.css";
+import InputRange from "react-input-range";
+import "../../components/RangeSlider/RangeSlider.css";
 
 class Search extends Component {
   state = {
@@ -136,6 +139,33 @@ class Search extends Component {
     if (!this.state.initialQuestions) {
       return (
         <Container>
+          <div class="container">
+            <InputRange
+              className="rangeSlider"
+              step={1000}
+              maxValue={5000}
+              minValue={1000}
+              value={this.state.distance}
+              onChange={distance => this.setState({ distance })}
+            />
+            <InputRange
+              className="rangeSlider"
+              step={1}
+              maxValue={4}
+              minValue={0}
+              value={this.state.minPrice}
+              onChange={minPrice => this.setState({ minPrice })}
+            />
+            <InputRange
+              className="rangeSlider"
+              step={1}
+              maxValue={4}
+              minValue={0}
+              value={this.state.maxPrice}
+              onChange={maxPrice => this.setState({ maxPrice })}
+            />
+          </div>
+
           <Form>
             <FormGroup row>
               <Label sm={2}>Distance</Label>
