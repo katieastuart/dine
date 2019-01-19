@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 import "react-input-range/lib/css/index.css";
 import InputRange from "react-input-range";
 import "../../components/RangeSlider/RangeSlider.css";
-import { MyContext } from '../../App';
+import { MyContext } from "../../App";
 
 var timerId = null;
 
@@ -21,20 +21,19 @@ class Search extends Component {
     latitude: "",
     longitude: "",
     // max distance is 50000.
-    distance: "1000",
+    distance: 1000,
     // 0 is the most affortable and lowest option.
-    minPrice: "0",
+    minPrice: 0,
     // 4 is the most expensive and the hightest option.
-    maxPrice: "4",
+    maxPrice: 4,
     redirect: false,
     initialQuestions: false,
     modal: false
   };
 
   componentDidMount = () => {
-
-    timerId = setTimeout(()=>{
-        var storeLocation = userLocationInformation => {
+    timerId = setTimeout(() => {
+      var storeLocation = userLocationInformation => {
         var userLatitude = userLocationInformation.coords.latitude;
         var userLongitude = userLocationInformation.coords.longitude;
         this.setState({ latitude: userLatitude, longitude: userLongitude });
@@ -51,11 +50,10 @@ class Search extends Component {
       } else {
         alert("Geolocation is not supported by this browser");
       }
-    }, 500)
-  
+    }, 500);
   };
   componentWillUnmount() {
-    clearTimeout(timerId)
+    clearTimeout(timerId);
   }
 
   handleInputChange = event => {
@@ -67,19 +65,19 @@ class Search extends Component {
     });
   };
 
-  setTreatOrFood = (event) => {
+  setTreatOrFood = event => {
     if (event.target.value === "treat") {
       this.setState({
         searchSelection: treatSearch[this.state.index],
         initialQuestions: true
-      })
+      });
     } else {
       this.setState({
         searchSelection: foodSearch[this.state.index],
         initialQuestions: true
-      })
+      });
     }
-  }
+  };
 
   incrementIndex = () => {
     if (this.state.index === 5) {
@@ -101,152 +99,159 @@ class Search extends Component {
     }
   };
 
-  addRestaurantData = (res) => {
-    console.log(res)
+  addRestaurantData = res => {
+    console.log(res);
     for (var i = 0; i < 5; i++) {
-      API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
-      
+      API.addRestaurant(
+        res.type,
+        res.response[i].name,
+        res.response[i].formatted_address,
+        res.response[i].place_id,
+        res.response[i].rating,
+        res.response[i].price_level,
+        res.response[i].photos[0].photo_reference
+      );
     }
-  }
+  };
 
   googleAPICall = () => {
     console.log(this.state.searchSelection);
     API.google(this.state).then(res => this.addRestaurantData(res.data));
 
-    this.incrementIndex()
+    this.incrementIndex();
   };
 
   render() {
-
-    return(
+    return (
       <MyContext.Consumer>
-        {(context) => {
+        {context => {
+          if (!context.state.loggedIn) {
+            return <Redirect to="/" />;
+          }
 
-        if (!context.state.loggedIn) {
-          return <Redirect to="/" />;
-        }
-        
-        if (this.state.redirect) {
-          return <Redirect to="/results" />;
-        }
+          if (this.state.redirect) {
+            return <Redirect to="/results" />;
+          }
 
+          if (!this.state.initialQuestions) {
+            return (
+              <Container>
+                <div className="container">
+                  <InputRange
+                    className="rangeSlider"
+                    step={1000}
+                    maxValue={5000}
+                    minValue={1000}
+                    value={this.state.distance}
+                    onChange={distance => this.setState({ distance })}
+                  />
+                  <InputRange
+                    className="rangeSlider"
+                    step={1}
+                    maxValue={4}
+                    minValue={0}
+                    value={this.state.minPrice}
+                    onChange={minPrice => this.setState({ minPrice })}
+                  />
+                  <InputRange
+                    className="rangeSlider"
+                    step={1}
+                    maxValue={4}
+                    minValue={0}
+                    value={this.state.maxPrice}
+                    onChange={maxPrice => this.setState({ maxPrice })}
+                  />
+                </div>
 
-        if (!this.state.initialQuestions) {
-      return (
-        <Container>
-          <div class="container">
-            <InputRange
-              className="rangeSlider"
-              step={1000}
-              maxValue={5000}
-              minValue={1000}
-              value={this.state.distance}
-              onChange={distance => this.setState({ distance })}
-            />
-            <InputRange
-              className="rangeSlider"
-              step={1}
-              maxValue={4}
-              minValue={0}
-              value={this.state.minPrice}
-              onChange={minPrice => this.setState({ minPrice })}
-            />
-            <InputRange
-              className="rangeSlider"
-              step={1}
-              maxValue={4}
-              minValue={0}
-              value={this.state.maxPrice}
-              onChange={maxPrice => this.setState({ maxPrice })}
-            />
-          </div>
+                <Form>
+                  <FormGroup row>
+                    <Label sm={2}>Distance</Label>
+                    <Col sm={10}>
+                      <Input
+                        onChange={this.handleInputChange}
+                        value={this.state.distance}
+                        name="distance"
+                        type="text"
+                      />
+                    </Col>
+                  </FormGroup>
 
-          <Form>
-            <FormGroup row>
-              <Label sm={2}>Distance</Label>
-              <Col sm={10}>
-                <Input
-                  onChange={this.handleInputChange}
-                  value={this.state.distance}
-                  name="distance"
-                  type="text"
-                />
-              </Col>
-            </FormGroup>
+                  <FormGroup row>
+                    <Label sm={2}>Min Price</Label>
+                    <Col sm={10}>
+                      <Input
+                        onChange={this.handleInputChange}
+                        value={this.state.minPrice}
+                        name="minPrice"
+                        type="text"
+                      />
+                    </Col>
+                  </FormGroup>
 
-            <FormGroup row>
-              <Label sm={2}>Min Price</Label>
-              <Col sm={10}>
-                <Input
-                  onChange={this.handleInputChange}
-                  value={this.state.minPrice}
-                  name="minPrice"
-                  type="text"
-                />
-              </Col>
-            </FormGroup>
+                  <FormGroup row>
+                    <Label sm={2}>Max Price</Label>
+                    <Col sm={10}>
+                      <Input
+                        onChange={this.handleInputChange}
+                        value={this.state.maxPrice}
+                        name="maxPrice"
+                        type="text"
+                      />
+                    </Col>
+                  </FormGroup>
 
-            <FormGroup row>
-              <Label sm={2}>Max Price</Label>
-              <Col sm={10}>
-                <Input
-                  onChange={this.handleInputChange}
-                  value={this.state.maxPrice}
-                  name="maxPrice"
-                  type="text"
-                />
-              </Col>
-            </FormGroup>
+                  <FormGroup row>
+                    <Col sm={10}>
+                      <p>Please select treat or food</p>
+                      <Button onClick={this.setTreatOrFood} value={"treat"}>
+                        treat
+                        {/* <img src="../../images/ice-cream.png" /> */}
+                      </Button>
+                      <Button onClick={this.setTreatOrFood} value={"food"}>
+                        food
+                      </Button>
+                    </Col>
+                  </FormGroup>
+                </Form>
+              </Container>
+            );
+          }
 
-            <FormGroup row>
-              <Col sm={10}>
-                <p>Please select treat or food</p>
-                <Button onClick={this.setTreat}>
-                  treat
-                  {/* <img src="../../images/ice-cream.png" /> */}
-                </Button>
-                <Button onClick={this.setFood}>food</Button>
-              </Col>
-            </FormGroup>
-          </Form>
-        </Container>
-      );
-    }
-    
-        return (
-          <Container>
-            <Modal />
-    
-            {
-              <Card>
-                <h1 style={{ background: "pink" }} draggable="true">
-                  {this.state.searchSelection.name}
-                </h1>
-                <CardImg
-                  id="foodCardType"
-                  className="foodCard"
-                  top
-                  width="100%"
-                  src={this.state.searchSelection.image}
-                  alt={this.state.searchSelection.name}
-                  value={this.state.searchSelection.name}
-                />
-    
-                <CardBody>
-                  <Button 
+          return (
+            <Container>
+              <Modal />
+
+              {
+                <Card>
+                  <h1 style={{ background: "pink" }} draggable="true">
+                    {this.state.searchSelection.name}
+                  </h1>
+                  <CardImg
+                    id="foodCardType"
+                    className="foodCard"
+                    top
+                    width="100%"
+                    src={this.state.searchSelection.image}
+                    alt={this.state.searchSelection.name}
                     value={this.state.searchSelection.name}
-                    onClick={this.googleAPICall}>Yes</Button>
-                  <Button onClick={this.incrementIndex}>No</Button>
-                </CardBody>
-              </Card>
-            }
-          </Container>
-        );
+                  />
+
+                  <CardBody>
+                    <Button
+                      value={this.state.searchSelection.name}
+                      onClick={this.googleAPICall}
+                    >
+                      Yes
+                    </Button>
+                    <Button onClick={this.incrementIndex}>No</Button>
+                  </CardBody>
+                </Card>
+              }
+            </Container>
+          );
         }}
-
       </MyContext.Consumer>
-
-    )
+    );
   }
 }
 
