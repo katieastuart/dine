@@ -24,13 +24,13 @@ module.exports = {
           restaurant_place_id: req.body.placeId,
           restaurant_rating: req.body.rating,
           restaurant_price_level: req.body.priceLevel,
-          restaurant_photo_reference: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + req.body.photoReference + "&key=AIzaSyAN-Maosba3R24Xqxv3aT-ZHcZ16dbzbdA"
+          restaurant_photo_reference: "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=" + req.body.photoReference + "&key="
         }).then(function (dbRes) {
           console.log(dbRes.dataValues.id)
           db.Last_Search.create({
             user_id: req.session.user.id,
             restaurant_id: dbRes.dataValues.id
-          }).then(function(res) {
+          }).then(function (res) {
             res.send(200);
           })
         });
