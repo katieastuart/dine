@@ -3,41 +3,36 @@
     "id": "1",
     "name": "Pizza",
     "category": "pizza",
-    "image": "client/src/images/foodThumbnails/pizzaThumbnail.jpg"
+    "image": "pizzaThumbnail.jpg"
   },
-
   {
     "id": "2",
     "name": "Mexican Food",
     "category": "mexican+food",
-    "image": "../../images/foodThumbnails/mexicanThumbnail"
+    "image": "mexicanThumbnail.jpg"
   },
-
   {
     "id": "3",
     "name": "Asain Food",
     "category": "asain+food",
-    "image": "../../images/foodThumbnails/asianThumbnail"
+    "image": "asianThumbnail.jpg"
   },
-
   {
     "id": "4",
     "name": "American Food",
     "category": "american+food",
-    "image": "../../images/foodThumbnails/americanThumbnail"
+    "image": "americanThumbnail.jpg"
   },
-
   {
     "id": "5",
     "name": "Italian Food",
     "category": "italian+food",
-    "image": "../../images/foodThumbnails/italianThumbnail"
+    "image": "italianThumbnail.jpg"
   },
-
   {
     "id": "6",
     "name": "Salad and Sandwiches",
     "category": "salad+sandwiches",
-    "image": "../../images/foodThumbnails/saladThumbnail"
+    "image": "saladThumbnail.jpg"
   }
 ]

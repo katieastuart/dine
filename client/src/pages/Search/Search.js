@@ -246,7 +246,7 @@ class Search extends Component {
                       className="foodCard"
                       top
                       width="100%"
-                      src={this.state.searchSelection.image}
+                      src={require("../../images/foodThumbnails/" + this.state.searchSelection.image)}
                       alt={this.state.searchSelection.name}
                       value={this.state.searchSelection.name}
                     />
