@@ -11,6 +11,7 @@ import { Container } from "../../components/Grid";
 import { Redirect } from "react-router-dom";
 import { MyContext } from "../../App";
 import API from "../../utils/API";
+import Nav from "../../components/Nav";
 
 class Favorite extends Component {
   state = {
@@ -40,35 +41,38 @@ class Favorite extends Component {
           }
 
           return (
-            <Container>
-              <CardColumns>
-                {this.state.favorites.map(favorite => (
-                  <Card key={favorite.id}>
-                    <CardImg
-                      top
-                      width="100%"
-                      src={favorite.restaurant_photo_reference}
-                      alt={favorite.restaurant_name}
-                    />
-                    <CardBody>
-                      <CardTitle>
-                        {favorite.restaurant_name} -{" "}
-                        {favorite.restaurant_price_level}
-                      </CardTitle>
-                      <a
-                        href={
-                          "https://www.google.com/maps/dir//" +
-                          favorite.restaurant_address
-                        }
-                        target="_blank"
-                      >
-                        <Button>Directions</Button>
-                      </a>
-                    </CardBody>
-                  </Card>
-                ))}
-              </CardColumns>
-            </Container>
+            <div>
+              <Nav />
+              <Container>
+                <CardColumns>
+                  {this.state.favorites.map(favorite => (
+                    <Card key={favorite.id}>
+                      <CardImg
+                        top
+                        width="100%"
+                        src={favorite.restaurant_photo_reference}
+                        alt={favorite.restaurant_name}
+                      />
+                      <CardBody>
+                        <CardTitle>
+                          {favorite.restaurant_name} -{" "}
+                          {favorite.restaurant_price_level}
+                        </CardTitle>
+                        <a
+                          href={
+                            "https://www.google.com/maps/dir//" +
+                            favorite.restaurant_address
+                          }
+                          target="_blank"
+                        >
+                          <Button>Directions</Button>
+                        </a>
+                      </CardBody>
+                    </Card>
+                  ))}
+                </CardColumns>
+              </Container>
+            </div>
           );
         }}
       </MyContext.Consumer>

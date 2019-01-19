@@ -6,7 +6,6 @@ import Results from "./pages/Results";
 import Favorites from "./pages/Favorites";
 import LogOut from "./pages/LogOut";
 import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
 import API from "./utils/API";
 
 export const MyContext = React.createContext();
@@ -86,7 +85,7 @@ export class App extends Component {
       >
         <Router>
           <div>
-            <Nav />
+            {/* <Nav /> */}
             <Switch>
               <Route exact path="/" component={Profile} />
               <Route exact path="/search" component={Search} />
