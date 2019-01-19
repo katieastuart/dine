@@ -38,17 +38,21 @@ module.exports = {
   },
   //add new favorite
   addFavorite: function(req, res) {
+    console.log(req.session.user.id);
+    console.log(req.body.id);
+    
     db.Restaurants.findAll({
       where: {
-        id: req.session.user.id
+        id: req.body.id
       }
     }).then(function(dbRes) {
+      console.log(dbRes[0].dataValues.id);
       db.Favorites.create({
           user_id: req.session.user.id,
           UserId: req.session.user.id,
           restaurant_id: dbRes[0].dataValues.id,
           RestaurantId: dbRes[0].dataValues.id
-        })
+        }).then(dbres => res.json(dbres))
 
       console.log(req.session.user.id);
       console.log(dbRes[0].dataValues.id);

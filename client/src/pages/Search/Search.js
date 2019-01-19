@@ -99,24 +99,22 @@ class Search extends Component {
     }
   };
 
-  addRestaurantData = res => {
-    console.log(res);
-    for (var i = 0; i < 5; i++) {
-      API.addRestaurant(
-        res.type,
-        res.response[i].name,
-        res.response[i].formatted_address,
-        res.response[i].place_id,
-        res.response[i].rating,
-        res.response[i].price_level,
-        res.response[i].photos[0].photo_reference
-      );
+
+  addRestaurantData = (res) => {
+    console.log(res)
+    if(res.response.length > 0) {
+      for (var i = 0; i < 5; i++) {
+        if(res.response[i] !== undefined) {
+            API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
+          }
+        }
     }
   };
 
   googleAPICall = () => {
     console.log(this.state.searchSelection);
     API.google(this.state).then(res => this.addRestaurantData(res.data));
+    // API.google(this.state).then(res => console.log(res.data.response));
 
     this.incrementIndex();
   };
@@ -163,79 +161,77 @@ class Search extends Component {
                   />
                 </div>
 
-                <Form>
-                  <FormGroup row>
-                    <Label sm={2}>Distance</Label>
-                    <Col sm={10}>
-                      <Input
-                        onChange={this.handleInputChange}
-                        value={this.state.distance}
-                        name="distance"
-                        type="text"
-                      />
-                    </Col>
-                  </FormGroup>
+              <Form>
+            <FormGroup row>
+              <Label sm={2}>Distance</Label>
+              <Col sm={10}>
+                <Input
+                  onChange={this.handleInputChange}
+                  value={this.state.distance}
+                  name="distance"
+                  type="text"
+                />
+              </Col>
+            </FormGroup>
 
-                  <FormGroup row>
-                    <Label sm={2}>Min Price</Label>
-                    <Col sm={10}>
-                      <Input
-                        onChange={this.handleInputChange}
-                        value={this.state.minPrice}
-                        name="minPrice"
-                        type="text"
-                      />
-                    </Col>
-                  </FormGroup>
+            <FormGroup row>
+              <Label sm={2}>Min Price</Label>
+              <Col sm={10}>
+                <Input
+                  onChange={this.handleInputChange}
+                  value={this.state.minPrice}
+                  name="minPrice"
+                  type="text"
+                />
+              </Col>
+            </FormGroup>
 
-                  <FormGroup row>
-                    <Label sm={2}>Max Price</Label>
-                    <Col sm={10}>
-                      <Input
-                        onChange={this.handleInputChange}
-                        value={this.state.maxPrice}
-                        name="maxPrice"
-                        type="text"
-                      />
-                    </Col>
-                  </FormGroup>
+            <FormGroup row>
+              <Label sm={2}>Max Price</Label>
+              <Col sm={10}>
+                <Input
+                  onChange={this.handleInputChange}
+                  value={this.state.maxPrice}
+                  name="maxPrice"
+                  type="text"
+                />
+              </Col>
+            </FormGroup>
 
-                  <FormGroup row>
-                    <Col sm={10}>
-                      <p>Please select treat or food</p>
-                      <Button onClick={this.setTreatOrFood} value={"treat"}>
-                        treat
-                        {/* <img src="../../images/ice-cream.png" /> */}
-                      </Button>
-                      <Button onClick={this.setTreatOrFood} value={"food"}>
-                        food
-                      </Button>
-                    </Col>
-                  </FormGroup>
-                </Form>
-              </Container>
-            );
-          }
-
-          return (
-            <Container>
-              <Modal />
-
-              {
-                <Card>
-                  <h1 style={{ background: "pink" }} draggable="true">
-                    {this.state.searchSelection.name}
-                  </h1>
-                  <CardImg
-                    id="foodCardType"
-                    className="foodCard"
-                    top
-                    width="100%"
-                    src={this.state.searchSelection.image}
-                    alt={this.state.searchSelection.name}
-                    value={this.state.searchSelection.name}
-                  />
-
+            <FormGroup row>
+              <Col sm={10}>
+                <p>Please select treat or food</p>
+                <Button onClick={this.setTreatOrFood} value={"treat"}>
+                  treat
+                  {/* <img src="../../images/ice-cream.png" /> */}
+                </Button>
+                <Button onClick={this.setTreatOrFood} value={"food"}>food</Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </Container>
+      );
+    }
+    
+        return (
+          <Container>
+            <Modal />
+    
+            {
+              <Card>
+                <h1 style={{ background: "pink" }} draggable="true">
+                  {this.state.searchSelection.name}
+                </h1>
+                <CardImg
+                  id="foodCardType"
+                  className="foodCard"
+                  top
+                  width="100%"
+                  src={this.state.searchSelection.image}
+                  alt={this.state.searchSelection.name}
+                  value={this.state.searchSelection.name}
+                />
+    
                   <CardBody>
                     <Button
                       value={this.state.searchSelection.name}
