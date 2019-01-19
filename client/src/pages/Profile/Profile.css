@@ -1,0 +1,41 @@
+body {
+  background-image: url("../../images/dineBackground.jpg");
+  background-size: cover;
+}
+
+/* Login screen styling */
+.dineLogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
+  width: 80%;
+}
+
+.options-div {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.leftButton {
+  margin: 0px 5px 0px 0px;
+}
+
+.btn {
+  width: 82px;
+  margin: none;
+}
+
+.buttons {
+  width: 175px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .dineLogo {
+    width: 40%;
+  }
+}
