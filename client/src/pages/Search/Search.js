@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 import "react-input-range/lib/css/index.css";
 import InputRange from "react-input-range";
 import "../../components/RangeSlider/RangeSlider.css";
-import { MyContext } from '../../App';
+import { MyContext } from "../../App";
 
 var timerId = null;
 
@@ -32,9 +32,8 @@ class Search extends Component {
   };
 
   componentDidMount = () => {
-
-    timerId = setTimeout(()=>{
-        var storeLocation = userLocationInformation => {
+    timerId = setTimeout(() => {
+      var storeLocation = userLocationInformation => {
         var userLatitude = userLocationInformation.coords.latitude;
         var userLongitude = userLocationInformation.coords.longitude;
         this.setState({ latitude: userLatitude, longitude: userLongitude });
@@ -51,11 +50,10 @@ class Search extends Component {
       } else {
         alert("Geolocation is not supported by this browser");
       }
-    }, 500)
-  
+    }, 500);
   };
   componentWillUnmount() {
-    clearTimeout(timerId)
+    clearTimeout(timerId);
   }
 
   handleInputChange = event => {
@@ -67,19 +65,19 @@ class Search extends Component {
     });
   };
 
-  setTreatOrFood = (event) => {
+  setTreatOrFood = event => {
     if (event.target.value === "treat") {
       this.setState({
         searchSelection: treatSearch[this.state.index],
         initialQuestions: true
-      })
+      });
     } else {
       this.setState({
         searchSelection: foodSearch[this.state.index],
         initialQuestions: true
-      })
+      });
     }
-  }
+  };
 
   incrementIndex = () => {
     if (this.state.index === 5) {
@@ -101,6 +99,7 @@ class Search extends Component {
     }
   };
 
+
   addRestaurantData = (res) => {
     console.log(res)
     if(res.response.length > 0) {
@@ -110,62 +109,59 @@ class Search extends Component {
           }
         }
     }
-  }
+  };
 
   googleAPICall = () => {
     console.log(this.state.searchSelection);
     API.google(this.state).then(res => this.addRestaurantData(res.data));
     // API.google(this.state).then(res => console.log(res.data.response));
 
-    this.incrementIndex()
+    this.incrementIndex();
   };
 
   render() {
-
-    return(
+    return (
       <MyContext.Consumer>
-        {(context) => {
+        {context => {
+          if (!context.state.loggedIn) {
+            return <Redirect to="/" />;
+          }
 
-        if (!context.state.loggedIn) {
-          return <Redirect to="/" />;
-        }
-        
-        if (this.state.redirect) {
-          return <Redirect to="/results" />;
-        }
+          if (this.state.redirect) {
+            return <Redirect to="/results" />;
+          }
 
+          if (!this.state.initialQuestions) {
+            return (
+              <Container>
+                <div className="container">
+                  <InputRange
+                    className="rangeSlider"
+                    step={1000}
+                    maxValue={5000}
+                    minValue={1000}
+                    value={this.state.distance}
+                    onChange={distance => this.setState({ distance })}
+                  />
+                  <InputRange
+                    className="rangeSlider"
+                    step={1}
+                    maxValue={4}
+                    minValue={0}
+                    value={this.state.minPrice}
+                    onChange={minPrice => this.setState({ minPrice })}
+                  />
+                  <InputRange
+                    className="rangeSlider"
+                    step={1}
+                    maxValue={4}
+                    minValue={0}
+                    value={this.state.maxPrice}
+                    onChange={maxPrice => this.setState({ maxPrice })}
+                  />
+                </div>
 
-        if (!this.state.initialQuestions) {
-      return (
-        <Container>
-          <div className="container">
-            <InputRange
-              className="rangeSlider"
-              step={1000}
-              maxValue={5000}
-              minValue={1000}
-              value={this.state.distance}
-              onChange={distance => this.setState({ distance })}
-            />
-            <InputRange
-              className="rangeSlider"
-              step={1}
-              maxValue={4}
-              minValue={0}
-              value={this.state.minPrice}
-              onChange={minPrice => this.setState({ minPrice })}
-            />
-            <InputRange
-              className="rangeSlider"
-              step={1}
-              maxValue={4}
-              minValue={0}
-              value={this.state.maxPrice}
-              onChange={maxPrice => this.setState({ maxPrice })}
-            />
-          </div>
-
-          <Form>
+              <Form>
             <FormGroup row>
               <Label sm={2}>Distance</Label>
               <Col sm={10}>
@@ -236,21 +232,22 @@ class Search extends Component {
                   value={this.state.searchSelection.name}
                 />
     
-                <CardBody>
-                  <Button 
-                    value={this.state.searchSelection.name}
-                    onClick={this.googleAPICall}>Yes</Button>
-                  <Button onClick={this.incrementIndex}>No</Button>
-                </CardBody>
-              </Card>
-            }
-          </Container>
-        );
+                  <CardBody>
+                    <Button
+                      value={this.state.searchSelection.name}
+                      onClick={this.googleAPICall}
+                    >
+                      Yes
+                    </Button>
+                    <Button onClick={this.incrementIndex}>No</Button>
+                  </CardBody>
+                </Card>
+              }
+            </Container>
+          );
         }}
-
       </MyContext.Consumer>
-
-    )
+    );
   }
 }
 

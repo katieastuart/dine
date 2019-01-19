@@ -4,12 +4,12 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import Results from "./pages/Results";
 import Favorites from "./pages/Favorites";
-import LogOut from "./pages/LogOut"
+import LogOut from "./pages/LogOut";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
-import API from './utils/API';
+import API from "./utils/API";
 
-export const MyContext = React.createContext()
+export const MyContext = React.createContext();
 
 export class App extends Component {
   state = {
@@ -17,10 +17,29 @@ export class App extends Component {
     last_name: "",
     email: "",
     password: "",
-    loggedIn: false
-  }
+    loggedIn: false,
+    showLogIn: false,
+    showSignUp: false
+  };
+  showLogIn = () => {
+    this.setState({ showLogIn: true });
+    console.log("LOGGING IN", this.state);
+  };
 
-  handleInputChange = (event) => {
+  hideLogin = () => {
+    this.setState({ showLogIn: false, showSignUp: true });
+  };
+
+  hideSignUp = () => {
+    this.setState({ showLogIn: true, showSignUp: false });
+  };
+
+  showSignUp = () => {
+    this.setState({ showSignUp: true });
+    console.log("SIGNING UP", this.state);
+  };
+
+  handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
 
@@ -32,33 +51,39 @@ export class App extends Component {
   userSignUp = () => {
     API.signup(this.state).then(res => {
       this.setState({
-      loggedIn: res.data.loggedIn,
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: ""
-    })})
-  }
+        loggedIn: res.data.loggedIn,
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: ""
+      });
+    });
+  };
 
   userLogin = () => {
     API.login(this.state).then(res => {
       this.setState({
-      loggedIn: res.data.loggedIn,
-      email: "",
-      password: ""
-    })})
-  }
+        loggedIn: res.data.loggedIn,
+        email: "",
+        password: ""
+      });
+    });
+  };
 
   render() {
     return (
-      <MyContext.Provider value={
-        {
+      <MyContext.Provider
+        value={{
           state: this.state,
           handleInputChange: this.handleInputChange,
           userSignUp: this.userSignUp,
-          userLogin: this.userLogin
-        }
-        }>
+          userLogin: this.userLogin,
+          showLogIn: this.showLogIn,
+          showSignUp: this.showSignUp,
+          hideLogin: this.hideLogin,
+          hideSignUp: this.hideSignUp
+        }}
+      >
         <Router>
           <div>
             <Nav />
@@ -73,9 +98,8 @@ export class App extends Component {
           </div>
         </Router>
       </MyContext.Provider>
-    )
-  } 
+    );
+  }
 }
-
 
 export default App;
