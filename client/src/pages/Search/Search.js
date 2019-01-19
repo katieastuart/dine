@@ -66,17 +66,23 @@ class Search extends Component {
     });
   };
 
-  setTreatOrFood = event => {
+  clearLastSearch = () => {
+    API.deleteLastResults().then(res => console.log(res));
+  }
+
+  setTreatOrFood = (event) => {
     if (event.target.value === "treat") {
       this.setState({
         searchSelection: treatSearch[this.state.index],
         initialQuestions: true
-      });
+      })
+      this.clearLastSearch()
     } else {
       this.setState({
         searchSelection: foodSearch[this.state.index],
         initialQuestions: true
-      });
+      })
+      this.clearLastSearch()
     }
   };
 
@@ -105,8 +111,16 @@ class Search extends Component {
     console.log(res)
     if (res.response.length > 0) {
       for (var i = 0; i < 5; i++) {
-        if (res.response[i] !== undefined) {
-          API.addRestaurant(res.type, res.response[i].name, res.response[i].formatted_address, res.response[i].place_id, res.response[i].rating, res.response[i].price_level, res.response[i].photos[0].photo_reference)
+        if(res.response[i] !== undefined) {
+            API.addRestaurant(
+                res.type, 
+                res.response[i].name, 
+                res.response[i].formatted_address, 
+                res.response[i].place_id, 
+                res.response[i].rating, 
+                res.response[i].price_level, 
+                res.response[i].photos[0].photo_reference)
+            .then(res => {})
         }
       }
     }
