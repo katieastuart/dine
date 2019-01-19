@@ -9,9 +9,13 @@ export default {
   findAllFavorites: function(id) {
     return axios.get("/api/favorites/" + id)
   },
+  // Find all favorites by id
+  findFavoriteTypes: function() {
+    return axios.get("/api/favorites/")
+  },
   // Find all favorites by id and type
-  findAllFavoritesType: function(type, id) {
-    return axios.get("/api/favorites/" + type + "/" + id)
+  findAllType: function(type) {
+    return axios.post("/api/favorites/" + type)
   },
   // Add a new favorite
   addFavorite: function(id) {

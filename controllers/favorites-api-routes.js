@@ -17,6 +17,17 @@ module.exports = {
       res.json(dbExamples);
     });
   },
+  //select distinct food types
+  findFavoriteTypes: function(req, res) {
+  db.sequelize
+    .query(
+      "select restaurant_type from favorites f join Restaurants r on f.restaurantid = r.id where userid = " + req.session.user.id + " group by userid,restaurant_type order by 1")
+      .spread((results, metadata) => {
+        console.log(results)
+        res.json(results)
+
+      })
+  },
   //select all favorites for a user by type
   findAllType: function(req, res) {
     db.Users.findAll({
