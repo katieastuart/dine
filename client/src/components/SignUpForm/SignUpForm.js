@@ -9,7 +9,7 @@ export default class Example extends React.Component {
       <MyContext.Consumer>
         {context => {
           if (context.state.loggedIn) {
-            return <Redirect to={{ pathname: "/search" }} />;
+            return <Redirect to={{ pathname: "/home" }} />;
           }
 
           return (

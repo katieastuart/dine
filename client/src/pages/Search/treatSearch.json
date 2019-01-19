@@ -3,41 +3,36 @@
     "id": "1",
     "name": "Ice Cream",
     "category": "ice+cream",
-    "image": "https://images.pexels.com/photos/461430/pexels-photo-461430.jpeg?cs=srgb&dl=birthday-break-breakfast-461430.jpg&fm=jpg"
+    "image": "iceCreamThumbnail.jpg"
   },
-
   {
     "id": "2",
     "name": "Cheesecake",
     "category": "cheese+cake",
-    "image": "https://images.pexels.com/photos/1126359/pexels-photo-1126359.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    "image": "cheesecakeThumbnail.jpeg"
   },
-
   {
     "id": "3",
     "name": "Bakery Treats",
     "category": "bakery",
-    "image": "https://images.pexels.com/photos/192933/pexels-photo-192933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    "image": "bakeryThumbnail.jpeg"
   },
-
   {
     "id": "4",
     "name": "Smoothie",
     "category": "smoothie",
-    "image": "https://images.pexels.com/photos/109341/pexels-photo-109341.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    "image": "smoothieThumbnail.jpeg"
   },
-
   {
     "id": "5",
     "name": "Cookies",
     "category": "cookie",
-    "image": "https://marketplace.canva.com/MADGyPpqxjo/4/screen/canva-two-baked-cookies-MADGyPpqxjo.jpg"
+    "image": "cookieThumbnail.jpg"
   },
-
   {
     "id": "6",
     "name": "Soda",
     "category": "soda",
-    "image": "https://images.pexels.com/photos/1549041/pexels-photo-1549041.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+    "image": "sodaThumbnail.jpeg"
   }
 ]
