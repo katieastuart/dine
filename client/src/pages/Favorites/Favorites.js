@@ -27,7 +27,7 @@ export default class Favorite extends Component {
   }
 
   componentDidMount() {
-    timerId = setTimeout(()=>{
+    timerId = setTimeout(() => {
       this.loadFavorites();
       this.findFavoritesTypes();
     }, 500)
@@ -77,9 +77,11 @@ export default class Favorite extends Component {
           if (!context.state.loggedIn) {
             return <Redirect to={{ pathname: "/" }} />;
           }
-      
-          return(
-            <Container>
+
+          return (
+            <div>
+              <Nav />
+              <Container>
                 <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                   <DropdownToggle caret>
                     Button Dropdown
@@ -120,6 +122,7 @@ export default class Favorite extends Component {
                 </CardColumns>
               </Container>
             </div>
+
           );
         }}
       </MyContext.Consumer>
