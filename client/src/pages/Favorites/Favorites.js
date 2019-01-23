@@ -62,6 +62,32 @@ export default class Favorite extends Component {
       .catch(err => console.log(err));
   };
 
+  deleteFavorite = (event) => {
+    console.log(event.target.value)
+    API.deleteFavorite(event.target.value)
+      .then(res => this.loadFavorites()
+      )
+      .catch(err => console.log(err));
+  };
+
+  TransformPriceLevel = (priceLevel) => {
+    if (priceLevel === "1") {
+      return <p>$</p>;
+    }
+    if (priceLevel === "2") {
+      return <p>$$</p>;
+    }
+    if (priceLevel === "3") {
+      return <p>$$$</p>;
+    }
+    if (priceLevel === "4") {
+      return <p>$$$$</p>;
+    }
+    if (priceLevel === "5") {
+      return <p>$$$$$</p>;
+    }
+  };
+
   resetFavorites = (event) => {
     this.loadFavorites()
   };
@@ -79,10 +105,13 @@ export default class Favorite extends Component {
           }
       
           return(
+            <div>
+            <Nav />
             <Container>
+              <h1>Favorites</h1>
                 <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                   <DropdownToggle caret>
-                    Button Dropdown
+                    Filter
                   </DropdownToggle>
                   <DropdownMenu>
                     {this.state.types.map(type => (
@@ -94,6 +123,7 @@ export default class Favorite extends Component {
                 <CardColumns>
                   {this.state.favorites.map(favorite => (
                     <Card key={favorite.id}>
+                    <button value={favorite.id} onClick={this.deleteFavorite}>x</button>
                       <CardImg
                         top
                         width="100%"
@@ -102,8 +132,7 @@ export default class Favorite extends Component {
                       />
                       <CardBody>
                         <CardTitle>
-                          {favorite.restaurant_name} -{" "}
-                          {favorite.restaurant_price_level}
+                          {favorite.restaurant_name} -{" "} {this.TransformPriceLevel(favorite.restaurant_price_level)}
                         </CardTitle>
                         <a
                           href={
@@ -119,7 +148,7 @@ export default class Favorite extends Component {
                   ))}
                 </CardColumns>
               </Container>
-            </div>
+             </div>
           );
         }}
       </MyContext.Consumer>
