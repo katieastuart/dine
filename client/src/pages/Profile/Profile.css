@@ -1,15 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Allerta');
+
 body {
-  background-image: url("../../images/dineBackground.jpg");
+   background: url("../../images/dineBackground.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
 }
 
+label{
+  font-family: 'Allerta', sans-serif; 
+}
+
 /* Login screen styling */
+/*Logo*/
 .dineLogo {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 4rem;
+  margin-top: 8rem;
   width: 80%;
+}
+
+.dineLogoSmall {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4rem;
+  width: 30%;
+}
+
+.dineLogoSmallTop {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  width: 30%;
+}
+
+.mainForm{
+  margin-top: 20px;
+  background:rgba(238, 231, 231, 0.5);
+  padding: 10px;
+  border-radius: 15px;
 }
 
 .options-div {
@@ -19,23 +52,61 @@ body {
 }
 
 .leftButton {
-  margin: 0px 5px 0px 0px;
+  margin: 0px 5px 0px 7px;
 }
 
 .btn {
-  width: 82px;
+  font-family: 'Allerta', sans-serif; 
   margin: none;
 }
 
+.loginButton {
+  width: 90px;
+}
+
 .buttons {
-  width: 175px;
+  width: 200px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
 }
 
+.loginForm {
+  margin-top: 25px;
+}
+
 @media only screen and (min-width: 768px) {
   .dineLogo {
-    width: 40%;
+    width: 70%;
+    margin-top: 10rem;
   }
+
+  .dineLogoSmall {
+    margin-top: 10rem;
+    width: 30%;
+  }
+
+  .dineLogoSmallTop {
+    margin-top: 10rem;
+    width: 30%;
+  }
+  
+}
+
+@media only screen and (min-width: 1024px) {
+  .dineLogo {
+    width: 40%;
+    margin-top: 10rem;
+  }
+
+  .dineLogoSmall {
+    margin-top: 2rem;
+    width: 25%;
+  }
+
+  .dineLogoSmallTop {
+    margin-top: 2rem;
+    width: 25%;
+  }
+  
 }
