@@ -30,6 +30,24 @@ class Results extends Component {
     API.addFavorite(id)
   };
 
+  TransformPriceLevel = (priceLevel) => {
+    if (priceLevel === "1") {
+      return <p>$</p>;
+    }
+    if (priceLevel === "2") {
+      return <p>$$</p>;
+    }
+    if (priceLevel === "3") {
+      return <p>$$$</p>;
+    }
+    if (priceLevel === "4") {
+      return <p>$$$$</p>;
+    }
+    if (priceLevel === "5") {
+      return <p>$$$$$</p>;
+    }
+  };
+
   render() {
     return (
       <MyContext.Consumer>
@@ -52,7 +70,7 @@ class Results extends Component {
                         {restaurant.restaurant_name}
                       </Media>
                       <p>Rating: {restaurant.restaurant_rating}</p>
-                      <p>Price level: {restaurant.restaurant_price_level}</p>
+                      <p>Price level: {this.TransformPriceLevel(restaurant.restaurant_price_level)}</p>
                       <a href={"https://www.google.com/maps/dir//" + restaurant.restaurant_address} target="_blank"><Button>Directions</Button></a>
                       <Button onClick={() => { this.favoriteRestaurant(restaurant.id) }}>Favorite</Button>
                     </Media>

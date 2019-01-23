@@ -73,7 +73,8 @@ module.exports = {
   deleteFavorite: function(req, res) {
     db.Favorites.destroy({
       where: {
-        id: req.params.id
+        userid: req.session.user.id,
+        restaurantid: req.params.id
       }
     }).then(function(dbRes) {
       res.json(dbRes);
