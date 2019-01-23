@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { MyContext } from "../../App";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
+import "./Favorites.css"
 
 var timerId = null;
 
@@ -83,8 +84,8 @@ export default class Favorite extends Component {
               <Nav />
               <Container>
                 <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                  <DropdownToggle caret>
-                    Button Dropdown
+                  <DropdownToggle className="filterDropdown" caret>
+                    Sort
                   </DropdownToggle>
                   <DropdownMenu>
                     {this.state.types.map(type => (
@@ -114,7 +115,7 @@ export default class Favorite extends Component {
                           }
                           target="_blank"
                         >
-                          <Button>Directions</Button>
+                          <Button className="directionsButton">Directions</Button>
                         </a>
                       </CardBody>
                     </Card>

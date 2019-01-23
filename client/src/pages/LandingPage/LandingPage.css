@@ -1,0 +1,43 @@
+.landingPage {
+    background-color: whitesmoke;
+    margin: 5px;
+}
+
+.imgText {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* .card-img-top {
+    margin-top: 10px;
+    border: 1px solid #b8b8b8c0;
+    border-radius: 4px;
+} */
+
+.imgText {
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+a {
+    color: black;
+}
+
+.col-lg-4 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-body {
+    margin: 0px;
+}
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
