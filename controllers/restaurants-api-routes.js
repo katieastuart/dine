@@ -30,7 +30,7 @@ module.exports = {
           db.Last_Search.create({
             user_id: req.session.user.id,
             restaurant_id: dbRes.dataValues.id
-          }).then(function(res) {
+          }).then(function (res) {
             res.send(200);
           })
         });

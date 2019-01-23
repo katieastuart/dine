@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { MyContext } from "../../App";
 import API from "../../utils/API";
 import Nav from "../../components/Nav";
+import "./Favorites.css"
 
 var timerId = null;
 
@@ -27,7 +28,7 @@ export default class Favorite extends Component {
   }
 
   componentDidMount() {
-    timerId = setTimeout(()=>{
+    timerId = setTimeout(() => {
       this.loadFavorites();
       this.findFavoritesTypes();
     }, 500)
@@ -103,15 +104,13 @@ export default class Favorite extends Component {
           if (!context.state.loggedIn) {
             return <Redirect to={{ pathname: "/" }} />;
           }
-      
-          return(
+          return (
             <div>
-            <Nav />
-            <Container>
-              <h1>Favorites</h1>
+              <Nav />
+              <Container>
                 <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                  <DropdownToggle caret>
-                    Filter
+                  <DropdownToggle className="filterDropdown" caret>
+                    Sort
                   </DropdownToggle>
                   <DropdownMenu>
                     {this.state.types.map(type => (
@@ -141,7 +140,7 @@ export default class Favorite extends Component {
                           }
                           target="_blank"
                         >
-                          <Button>Directions</Button>
+                          <Button className="directionsButton">Directions</Button>
                         </a>
                       </CardBody>
                     </Card>

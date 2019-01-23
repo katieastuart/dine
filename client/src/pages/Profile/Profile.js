@@ -16,17 +16,27 @@ class Profile extends Component {
             return (
               <Container>
                 <div className="logoContainer">
-                  <img src={logoWhite} className="dineLogo" alt="Dine" />
+                  <img src={logoWhite} className="dineLogoSmall" alt="Dine" />
                 </div>
-                <LogInForm />;
-                <Button
-                  className="loginButton"
-                  color="secondary"
-                  onClick={context.hideLogin}
-                >
-                  Sign Up
+                <div className="mainForm">
+                  <LogInForm />
+                  <div className="loginForm">
+                    <label>New to Dine?</label>
+                    <Row>
+                      <Col sm={10}>
+                        <Button
+                          className="loginButton submit"
+                          color="secondary"
+                          onClick={context.hideLogin}
+                        >
+                          Sign Up
                 </Button>{" "}
+                      </Col>
+                    </Row>
+                  </div>
+                </div>
               </Container>
+
             );
           }
 
@@ -34,16 +44,25 @@ class Profile extends Component {
             return (
               <Container>
                 <div className="logoContainer">
-                  <img src={logoWhite} className="dineLogo" alt="Dine" />
+                  <img src={logoWhite} className="dineLogoSmallTop" alt="Dine" />
                 </div>
-                <SignUpForm />
-                <Button
-                  className="loginButton"
-                  color="secondary"
-                  onClick={context.hideSignUp}
-                >
-                  Log In
-                </Button>{" "}
+                <div className="mainForm">
+                  <SignUpForm />
+                  <div className="loginForm">
+                    <label>Already have an account?</label>
+                    <Row>
+                      <Col sm={10}>
+                        <Button
+                          className="loginButton submit"
+                          color="secondary"
+                          onClick={context.hideSignUp}
+                        >
+                          Log In
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                </div>
               </Container>
             );
           }
@@ -55,11 +74,11 @@ class Profile extends Component {
                   <img src={logoWhite} className="dineLogo" alt="Dine" />
                   <div>
                     <Row>
-                      <Col lg="4" />
-                      <Col lg="4">
+                      <Col lg={4} />
+                      <Col lg={4}>
                         <Row>
-                          <Col sm="1" />
-                          <Col sm="10">
+                          <Col sm={1} />
+                          <Col sm={10}>
                             <div className="buttons">
                               <Button
                                 className="loginButton leftButton"
@@ -78,10 +97,10 @@ class Profile extends Component {
                             </div>
                           </Col>
 
-                          <Col sm="1" />
+                          <Col sm={1} />
                         </Row>
                       </Col>
-                      <Col lg="4" />
+                      <Col lg={4} />
                     </Row>
                   </div>
                 </div>

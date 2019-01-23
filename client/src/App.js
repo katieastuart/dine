@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LandingPage from "./pages/LandingPage"
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import Results from "./pages/Results";
@@ -88,6 +89,7 @@ export class App extends Component {
             {/* <Nav /> */}
             <Switch>
               <Route exact path="/" component={Profile} />
+              <Route exact path="/home" component={LandingPage} />
               <Route exact path="/search" component={Search} />
               <Route exact path="/results" component={Results} />
               <Route exact path="/favorites" component={Favorites} />

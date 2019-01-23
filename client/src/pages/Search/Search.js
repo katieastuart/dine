@@ -12,6 +12,7 @@ import InputRange from "react-input-range";
 import Nav from "../../components/Nav";
 import "../../components/RangeSlider/RangeSlider.css";
 import { MyContext } from "../../App";
+import "./Search.css"
 
 var timerId = null;
 
@@ -111,16 +112,16 @@ class Search extends Component {
     console.log(res)
     if (res.response.length > 0) {
       for (var i = 0; i < 5; i++) {
-        if(res.response[i] !== undefined) {
-            API.addRestaurant(
-                res.type, 
-                res.response[i].name, 
-                res.response[i].formatted_address, 
-                res.response[i].place_id, 
-                res.response[i].rating, 
-                res.response[i].price_level, 
-                res.response[i].photos[0].photo_reference)
-            .then(res => {})
+        if (res.response[i] !== undefined) {
+          API.addRestaurant(
+            res.type,
+            res.response[i].name,
+            res.response[i].formatted_address,
+            res.response[i].place_id,
+            res.response[i].rating,
+            res.response[i].price_level,
+            res.response[i].photos[0].photo_reference)
+            .then(res => { })
         }
       }
     }
@@ -151,7 +152,8 @@ class Search extends Component {
               <div>
                 <Nav />
                 <Container>
-                  <div className="container">
+                  <div className="container mainForm">
+                    <Label>Distance</Label>
                     <InputRange
                       className="rangeSlider"
                       step={1000}
@@ -160,6 +162,8 @@ class Search extends Component {
                       value={this.state.distance}
                       onChange={distance => this.setState({ distance })}
                     />
+                    <Label>Min Price</Label>
+
                     <InputRange
                       className="rangeSlider"
                       step={1}
@@ -168,6 +172,8 @@ class Search extends Component {
                       value={this.state.minPrice}
                       onChange={minPrice => this.setState({ minPrice })}
                     />
+                    <Label>Max Price</Label>
+
                     <InputRange
                       className="rangeSlider"
                       step={1}
@@ -176,10 +182,9 @@ class Search extends Component {
                       value={this.state.maxPrice}
                       onChange={maxPrice => this.setState({ maxPrice })}
                     />
-                  </div>
 
-                  <Form>
-                    <FormGroup row>
+                    <Form>
+                      {/* <FormGroup row>
                       <Label sm={2}>Distance</Label>
                       <Col sm={10}>
                         <Input
@@ -189,9 +194,9 @@ class Search extends Component {
                           type="text"
                         />
                       </Col>
-                    </FormGroup>
+                    </FormGroup> */}
 
-                    <FormGroup row>
+                      {/* <FormGroup row>
                       <Label sm={2}>Min Price</Label>
                       <Col sm={10}>
                         <Input
@@ -201,9 +206,9 @@ class Search extends Component {
                           type="text"
                         />
                       </Col>
-                    </FormGroup>
+                    </FormGroup> */}
 
-                    <FormGroup row>
+                      {/* <FormGroup row>
                       <Label sm={2}>Max Price</Label>
                       <Col sm={10}>
                         <Input
@@ -213,19 +218,22 @@ class Search extends Component {
                           type="text"
                         />
                       </Col>
-                    </FormGroup>
+                    </FormGroup> */}
 
-                    <FormGroup row>
-                      <Col sm={10}>
-                        <p>Please select treat or food</p>
-                        <Button onClick={this.setTreatOrFood} value={"treat"}>
-                          treat
+                      <FormGroup row>
+                        <Col sm={10}>
+                          <p>Please select treat or food</p>
+                          <Button onClick={this.setTreatOrFood} value={"treat"}>
+                            treat
                   {/* <img src="../../images/ice-cream.png" /> */}
-                        </Button>
-                        <Button onClick={this.setTreatOrFood} value={"food"}>food</Button>
-                      </Col>
-                    </FormGroup>
-                  </Form>
+                          </Button>
+                          <Button onClick={this.setTreatOrFood} value={"food"}>food</Button>
+                        </Col>
+                      </FormGroup>
+                    </Form>
+
+
+                  </div>
                 </Container>
               </div>
             );
@@ -246,7 +254,7 @@ class Search extends Component {
                       className="foodCard"
                       top
                       width="100%"
-                      src={this.state.searchSelection.image}
+                      src={require("../../images/foodThumbnails/" + this.state.searchSelection.image)}
                       alt={this.state.searchSelection.name}
                       value={this.state.searchSelection.name}
                     />
