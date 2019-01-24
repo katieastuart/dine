@@ -1,12 +1,14 @@
 import React from "react";
 import { Collapse, Navbar, NavbarToggler, Nav, NavItem } from "reactstrap";
+import { Modal, Button, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Link } from "react-router-dom";
 import logo from "../../images/logoBlack.png";
 import "./Nav.css";
 
 export default class Example extends React.Component {
   state = {
-    collapsed: true
+    collapsed: true,
+    directionsModal: false
   };
 
   toggleNavbar = () => {
@@ -15,9 +17,23 @@ export default class Example extends React.Component {
     });
   };
 
+  toggleDirectionsModal = () => {
+    this.setState({
+      directionsModal: !this.state.directionsModal
+    });
+  }
+
   render() {
     return (
       <div>
+         <Modal isOpen={this.state.directionsModal} toggle={this.toggle}>
+          <ModalHeader toggle={this.toggleDirectionsModal}>How to use website</ModalHeader>
+          <ModalBody>This is how you use our awesome website.</ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={this.toggleDirectionsModal}>Close</Button>{' '}
+          </ModalFooter>
+        </Modal>
+
         <Navbar color="faded" light>
           <Nav navbar>
             <NavItem>
@@ -50,6 +66,11 @@ export default class Example extends React.Component {
                 <Link onClick={this.toggleNavbar} className="nav-link menuItem" to="/favorites">
                   Favorites<span className="sr-only">(current)</span>
                 </Link>
+              </NavItem>
+              <NavItem className="d-flex flex-row-reverse">
+                <button onClick={this.toggleDirectionsModal} className="nav-link howToStyling">
+                  How To<span className="sr-only">(current)</span>
+                </button>
               </NavItem>
               <NavItem>
                 <Link onClick={this.toggleNavbar} className="nav-link menuItem" to="/logout">
