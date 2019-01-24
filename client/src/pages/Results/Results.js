@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { MyContext } from '../../App';
 import Nav from "../../components/Nav";
 
+var timerId = null;
 
 class Results extends Component {
   state = {
@@ -13,7 +14,13 @@ class Results extends Component {
   };
 
   componentDidMount() {
-    this.loadResults();
+    setTimeout(() =>{
+      this.loadResults();
+    }, 1600)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(timerId);
   }
 
   loadResults = () => {

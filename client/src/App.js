@@ -21,9 +21,9 @@ export class App extends Component {
     showLogIn: false,
     showSignUp: false
   };
+  
   showLogIn = () => {
     this.setState({ showLogIn: true });
-    console.log("LOGGING IN", this.state);
   };
 
   hideLogin = () => {
