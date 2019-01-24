@@ -1,3 +1,37 @@
 .filterDropdown {
 margin-bottom: 25px;
 }
+
+.deleteBtn {
+    background-color: transparent;
+    margin-top: -5px;
+    border: 0;
+    font-size: 24px;
+    font-weight: 300;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    font-family: 'Allerta', sans-serif;
+}
+
+.deleteBtn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.cardImg {
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    margin-bottom: 50px;
+}
+
+.favoriteInfo {
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Allerta', sans-serif;
+}
