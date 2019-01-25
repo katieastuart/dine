@@ -14,7 +14,10 @@ nav {
 .howToStyling {
   border: none;
   background: transparent;
-  text-align: right;
   cursor: pointer;
+}
+
+button.howToStyling:focus {
+  outline: none;
 }
 

@@ -39,19 +39,19 @@ class Results extends Component {
 
   TransformPriceLevel = (priceLevel) => {
     if (priceLevel === "1") {
-      return <p>$</p>;
+      return "$";
     }
     if (priceLevel === "2") {
-      return <p>$$</p>;
+      return "$$";
     }
     if (priceLevel === "3") {
-      return <p>$$$</p>;
+      return "$$$";
     }
     if (priceLevel === "4") {
-      return <p>$$$$</p>;
+      return "$$$$";
     }
     if (priceLevel === "5") {
-      return <p>$$$$$</p>;
+      return "$$$$$";
     }
   };
 

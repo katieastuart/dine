@@ -27,10 +27,17 @@ export default class Example extends React.Component {
     return (
       <div>
          <Modal isOpen={this.state.directionsModal} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggleDirectionsModal}>How to use website</ModalHeader>
-          <ModalBody>This is how you use our awesome website.</ModalBody>
+          <ModalHeader toggle={this.toggleDirectionsModal}>Getting started with Dine</ModalHeader>
+          <ModalBody>
+            <ul>
+              <li>To begin a new search for delicious food near you click on "New Search." Select your search parameters and then begin making your food choices</li>
+              <li>To view results from previous search select "Results."</li>
+              <li>To save an item to your Favorites list click on the "favorite" button on Results page.</li>
+              <li>To get directions to the resturant click on "directions" on either the Results or Favorites page.</li>
+            </ul>
+          </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggleDirectionsModal}>Close</Button>{' '}
+            <Button color="danger" onClick={this.toggleDirectionsModal}>Close</Button>{' '}
           </ModalFooter>
         </Modal>
 
@@ -69,7 +76,7 @@ export default class Example extends React.Component {
               </NavItem>
               <NavItem className="d-flex flex-row-reverse">
                 <button onClick={this.toggleDirectionsModal} className="nav-link howToStyling">
-                  How To<span className="sr-only">(current)</span>
+                  Help<span className="sr-only">(current)</span>
                 </button>
               </NavItem>
               <NavItem>
