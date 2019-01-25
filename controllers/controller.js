@@ -11,7 +11,7 @@ module.exports = {
         req.body.maxPrice
         }&location=${req.body.latitude},${req.body.longitude}&radius=${
         req.body.distance
-        }&key=AIzaSyAN-Maosba3R24Xqxv3aT-ZHcZ16dbzbdA`
+        }&key=`
     }).then(function (response) {
       res.json({
         response: response.data.results,
