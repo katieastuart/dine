@@ -40,6 +40,13 @@
     margin-top: 20px;
 }
 
+.spinnerStyles {
+    display: flex;
+    justify-content: center;
+    margin-top: 40vh
+
+}
+
 @media screen and (max-width: 1000px) {
     .resultsImg {
         /* height: 200px; */
