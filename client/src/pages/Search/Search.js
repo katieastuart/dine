@@ -30,7 +30,7 @@ class Search extends Component {
     redirect: false,
     initialQuestions: false,
     errorModal: false,
-    browserUnsupportedModal: false
+    browserUnsupportedModal: true
   };
 
   componentDidMount = () => {
@@ -164,18 +164,18 @@ class Search extends Component {
             return (
               <div>
                 <Modal isOpen={this.state.errorModal}>
-                  <ModalHeader toggle={this.toggleForErrorModal}>Error, userlocation block</ModalHeader>
-                  <ModalBody>Uh Oh, it looks like you have blocked your location. You cannot use our website unless you allow us to have your location. Here is how to fix it.</ModalBody>
+                  <ModalHeader toggle={this.toggleForErrorModal}>Error: User Location Blocked</ModalHeader>
+                  <ModalBody>Uh Oh, it looks like you have blocked your location. You cannot use Dine unless we have permission to user your location. Please enable your location settings and refresh your page to continue.</ModalBody>
                   <ModalFooter>
-                    <Button color="primary" onClick={this.toggleForErrorModal}>Close</Button>{' '}
+                    <Button color="danger" onClick={this.toggleForErrorModal}>Close</Button>{' '}
                   </ModalFooter>
                 </Modal>
 
                 <Modal isOpen={this.state.browserUnsupportedModal}>
-                  <ModalHeader toggle={this.toggleForBrowserUnsupportedModal}>Error, browser does not support user location</ModalHeader>
-                  <ModalBody>Please use one of following web broswers to use our site.</ModalBody>
+                  <ModalHeader toggle={this.toggleForBrowserUnsupportedModal}>Error: Browser Not Supported</ModalHeader>
+                  <ModalBody>Your browser does not support geolocation. Please use one of following browsers instead: Google Chrome, Microsoft Edge, Mozilla Firefox, Safari</ModalBody>
                   <ModalFooter>
-                    <Button color="primary" onClick={this.toggleForBrowserUnsupportedModal}>Close</Button>{' '}
+                    <Button color="danger" onClick={this.toggleForBrowserUnsupportedModal}>Close</Button>{' '}
                   </ModalFooter>
                 </Modal>
                 <Nav />
