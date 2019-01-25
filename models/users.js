@@ -28,6 +28,14 @@ module.exports = function(sequelize, DataTypes) {
           len: [1]
         }
       }
+  },
+  {
+    indexes: [
+        {
+            unique: true,
+            fields: ['email']
+        }
+    ]
   });
   
     Users.associate = function(models) {

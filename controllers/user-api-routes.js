@@ -17,17 +17,20 @@ module.exports = {
         // Store hash in your password DB.
         req.body.password = hash;
         db.Users.create(req.body).then(function (dbData) {
-          var userObj = {
-            id: dbData.dataValues.id,
-            first_name: dbData.dataValues.first_name,
-            last_name: dbData.dataValues.last_name,
-            email: dbData.dataValues.email
-          };
-          req.session.user = userObj;
-          req.session.user.loggedIn = true;
+            var userObj = {
+              id: dbData.dataValues.id,
+              first_name: dbData.dataValues.first_name,
+              last_name: dbData.dataValues.last_name,
+              email: dbData.dataValues.email
+            };
+            req.session.user = userObj;
+            req.session.user.loggedIn = true;
+  
+            res.json(userObj);
+        }).catch(function(err) {
+          res.status(200).send('ohhh no, this email exists already!')
+        })
 
-          res.json(userObj);
-        });
       });
     });
   },

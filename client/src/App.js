@@ -19,7 +19,8 @@ export class App extends Component {
     password: "",
     loggedIn: false,
     showLogIn: false,
-    showSignUp: false
+    showSignUp: false,
+    showSignUpError: false
   };
   
   showLogIn = () => {
@@ -50,13 +51,22 @@ export class App extends Component {
 
   userSignUp = () => {
     API.signup(this.state).then(res => {
-      this.setState({
-        loggedIn: res.data.loggedIn,
-        first_name: "",
-        last_name: "",
-        email: "",
-        password: ""
-      });
+      console.log(res)
+      if(res.data === "ohhh no, this email exists already!") {
+        this.setState({
+          showSignUpError: true
+        })
+      }
+      else {
+        this.setState({
+          loggedIn: res.data.loggedIn,
+          first_name: "",
+          last_name: "",
+          email: "",
+          password: "",
+          showSignUpError: ""
+        });
+      }
     });
   };
 

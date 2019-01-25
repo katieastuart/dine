@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Button, Row } from "reactstrap";
+import { Col, Button, Row, Alert } from "reactstrap";
 import { Container } from "../../components/Grid";
 import LogInForm from "../../components/LogInForm";
 import SignUpForm from "../../components/SignUpForm";
@@ -40,6 +40,36 @@ class Profile extends Component {
             );
           }
 
+          if (context.state.showSignUpError) {
+            return (
+              <Container>
+                <div className="logoContainer">
+                  <img src={logoWhite} className="dineLogoSmallTop" alt="Dine" />
+                </div>
+                <Alert className="signInError" color="warning">
+                  There's already an account with that email.
+                </Alert>
+                <div className="mainForm">
+                  <SignUpForm />
+                  <div className="loginForm">
+                    <label>Already have an account?</label>
+                    <Row>
+                      <Col sm={10}>
+                        <Button
+                          className="loginButton submit"
+                          color="secondary"
+                          onClick={context.hideSignUp}
+                        >
+                          Log In
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                </div>
+              </Container>
+            );
+          }
+
           if (context.state.showSignUp) {
             return (
               <Container>
@@ -66,6 +96,8 @@ class Profile extends Component {
               </Container>
             );
           }
+
+          
 
           return (
             <Container>
