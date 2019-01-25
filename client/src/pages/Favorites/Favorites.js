@@ -131,6 +131,7 @@ export default class Favorite extends Component {
                       <CardBody>
                         <CardTitle className="favoriteInfo">
                           {favorite.restaurant_name}
+                          <br></br>
                           {this.TransformPriceLevel(favorite.restaurant_price_level)}
                         </CardTitle>
                         <a
