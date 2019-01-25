@@ -6,6 +6,10 @@ import { Redirect } from 'react-router-dom';
 import { MyContext } from '../../App';
 import Nav from "../../components/Nav";
 import "./LandingPage.css"
+import landingPage1 from "../../images/landingPage/landingPage1.jpg"
+import landingPage2 from "../../images/landingPage/landingPage2.jpg"
+import landingPage3 from "../../images/landingPage/landingPage3.jpg"
+
 
 
 class LandingPage extends Component {
@@ -23,27 +27,26 @@ class LandingPage extends Component {
                             <Nav />
                             <Container>
                                 <Row className="landingRow">
-                                    <Col md={4} className="landingPage">
+                                    <Col md={3} className="landingPage">
                                         <Link to="/search">
-                                            <div className="profileImgSelect">
-                                                <img className="landingPageImage" src="https://static.thenounproject.com/png/14173-200.png"></img>
+                                            <div className="profileImgSelect shadow-lg rounded">
+                                                <img className="landingPageImage" src={landingPage3} alt="Search"></img>
                                                 <div className="centered imgText">New Search</div>
                                             </div>
                                         </Link>
                                     </Col>
-                                    <Col md={4} className="landingPage">
+                                    <Col md={3} className="landingPage">
                                         <Link to="/results">
-                                            <div className="profileImgSelect">
-                                                <img className="landingPageImage" src="https://images.vexels.com/media/users/3/129762/isolated/preview/b8013d3077f62d29bce2664db694246b-check-flat-icon-by-vexels.png"></img>
+                                            <div className="profileImgSelect shadow-lg rounded">
+                                                <img className="landingPageImage" src={landingPage1} alt="Results"></img>
                                                 <div className="centered imgText">Results</div>
                                             </div>
                                         </Link>
                                     </Col>
-                                    <Col md={4} className="landingPage">
+                                    <Col md={3} className="landingPage">
                                         <Link to="/favorites">
-                                            <img className="landingPageImage" src="https://img.icons8.com/metro/1600/hearts.png"></img>
-
-                                            <div className="profileImgSelect">
+                                            <div className="profileImgSelect shadow-lg rounded">
+                                                <img className="landingPageImage" src={landingPage2} alt="Favorites"></img>
                                                 <div className="centered imgText">Favorites</div>
                                             </div>
                                         </Link>
