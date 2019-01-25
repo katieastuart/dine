@@ -41,7 +41,6 @@ export default {
   },
   // Find all search results for a user
   findAllResults: function() {
-    console.log("API.js")
     return axios.get("/api/last-search/")
   },
   // Delete last search results for a user

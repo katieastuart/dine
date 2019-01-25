@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, Input, FormGroup } from "reactstrap";
+import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, Input, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 import Modal from "../../components/Modal";
 import treatSearch from "./treatSearch.json";
 import foodSearch from "./foodSearch.json";
@@ -29,7 +29,8 @@ class Search extends Component {
     maxPrice: 0,
     redirect: false,
     initialQuestions: false,
-    modal: false
+    errorModal: false,
+    browserUnsupportedModal: false
   };
 
   componentDidMount = () => {
@@ -42,19 +43,36 @@ class Search extends Component {
 
       var errors = errorInformation => {
         if (errorInformation) {
-          alert("please allow location information to use website");
+          this.setState({
+            errorModal: true
+          })
         }
       };
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(storeLocation, errors);
       } else {
-        alert("Geolocation is not supported by this browser");
+        this.setState({
+          browserUnsupportedModal: true
+        })
       }
     }, 500);
   };
+
   componentWillUnmount() {
     clearTimeout(timerId);
+  }
+
+  toggleForErrorModal = () => {
+    this.setState({
+      errorModal: false
+    });
+  }
+
+  toggleForBrowserUnsupportedModal = () => {
+    this.setState({
+      browserUnsupportedModal: false
+    });
   }
 
   handleInputChange = event => {
@@ -108,7 +126,6 @@ class Search extends Component {
 
 
   addRestaurantData = (res) => {
-    console.log(res)
     if (res.response.length > 0) {
       for (var i = 0; i < 5; i++) {
         if (res.response[i] !== undefined) {
@@ -127,10 +144,7 @@ class Search extends Component {
   };
 
   googleAPICall = () => {
-    console.log(this.state.searchSelection);
     API.google(this.state).then(res => this.addRestaurantData(res.data));
-    // API.google(this.state).then(res => console.log(res.data.response));
-
     this.incrementIndex();
   };
 
@@ -149,6 +163,21 @@ class Search extends Component {
           if (!this.state.initialQuestions) {
             return (
               <div>
+                <Modal isOpen={this.state.errorModal}>
+                  <ModalHeader toggle={this.toggleForErrorModal}>Error, userlocation block</ModalHeader>
+                  <ModalBody>Uh Oh, it looks like you have blocked your location. You cannot use our website unless you allow us to have your location. Here is how to fix it.</ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={this.toggleForErrorModal}>Close</Button>{' '}
+                  </ModalFooter>
+                </Modal>
+
+                <Modal isOpen={this.state.browserUnsupportedModal}>
+                  <ModalHeader toggle={this.toggleForBrowserUnsupportedModal}>Error, browser does not support user location</ModalHeader>
+                  <ModalBody>Please use one of following web broswers to use our site.</ModalBody>
+                  <ModalFooter>
+                    <Button color="primary" onClick={this.toggleForBrowserUnsupportedModal}>Close</Button>{' '}
+                  </ModalFooter>
+                </Modal>
                 <Nav />
                 <Container>
                   <div className="container mainForm">
@@ -191,55 +220,16 @@ class Search extends Component {
                     />
 
                     <Form>
-                      {/* <FormGroup row>
-                      <Label sm={2}>Distance</Label>
-                      <Col sm={10}>
-                        <Input
-                          onChange={this.handleInputChange}
-                          value={this.state.distance}
-                          name="distance"
-                          type="text"
-                        />
-                      </Col>
-                    </FormGroup> */}
-
-                      {/* <FormGroup row>
-                      <Label sm={2}>Min Price</Label>
-                      <Col sm={10}>
-                        <Input
-                          onChange={this.handleInputChange}
-                          value={this.state.minPrice}
-                          name="minPrice"
-                          type="text"
-                        />
-                      </Col>
-                    </FormGroup> */}
-
-                      {/* <FormGroup row>
-                      <Label sm={2}>Max Price</Label>
-                      <Col sm={10}>
-                        <Input
-                          onChange={this.handleInputChange}
-                          value={this.state.maxPrice}
-                          name="maxPrice"
-                          type="text"
-                        />
-                      </Col>
-                    </FormGroup> */}
-
                       <FormGroup row>
                         <Col sm={10}>
                           <p>Please select treat or food</p>
                           <Button className="treatButton" onClick={this.setTreatOrFood} value={"treat"}>
                             treat
-                  {/* <img src="../../images/ice-cream.png" /> */}
                           </Button>
                           <Button className="foodButton" onClick={this.setTreatOrFood} value={"food"}>food</Button>
                         </Col>
                       </FormGroup>
                     </Form>
-
-
                   </div>
                 </Container>
               </div>

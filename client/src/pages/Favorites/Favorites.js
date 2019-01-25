@@ -38,7 +38,6 @@ export default class Favorite extends Component {
     API.findAllFavorites()
       .then(res =>
         this.setState({ favorites: res.data[0].user_favorite }, () => {
-          console.log(this.state.favorites);
         })
       )
       .catch(err => console.log(err));
@@ -48,7 +47,6 @@ export default class Favorite extends Component {
     API.findFavoriteTypes()
       .then(res =>
         this.setState({ types: res.data }, () => {
-          console.log(this.state.types);
         })
       )
       .catch(err => console.log(err));
@@ -122,16 +120,18 @@ export default class Favorite extends Component {
                 <CardColumns>
                   {this.state.favorites.map(favorite => (
                     <Card key={favorite.id}>
-                    <button value={favorite.id} onClick={this.deleteFavorite}>x</button>
-                      <CardImg
-                        top
-                        width="100%"
-                        src={favorite.restaurant_photo_reference}
-                        alt={favorite.restaurant_name}
-                      />
+                        <button value={favorite.id} onClick={this.deleteFavorite} className="deleteBtn">x</button>
+                        <CardImg
+                          className="cardImg"
+                          top
+                          width="100%"
+                          src={favorite.restaurant_photo_reference}
+                          alt={favorite.restaurant_name}
+                        />
                       <CardBody>
-                        <CardTitle>
-                          {favorite.restaurant_name} -{" "} {this.TransformPriceLevel(favorite.restaurant_price_level)}
+                        <CardTitle className="favoriteInfo">
+                          {favorite.restaurant_name}
+                          {this.TransformPriceLevel(favorite.restaurant_price_level)}
                         </CardTitle>
                         <a
                           href={

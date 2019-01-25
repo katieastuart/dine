@@ -1,0 +1,61 @@
+.container {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.resultsContainer {
+    background:rgba(238, 231, 231, 0.5);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.resultsTitle {
+    font-size: 36px;
+    font-family: 'Allerta', sans-serif;
+    margin-bottom: 20px;
+}
+
+.resultsImg {
+    width: 100%;
+    object-fit: cover;
+    object-position: 100% 0;
+    height: 266px;
+    padding-right: 20px;
+}
+
+#listGroupItem {
+    background-color: transparent;
+    border: 0;
+}
+
+.directionBtn, .favoriteBtn {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.resultPrice {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Allerta', sans-serif;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+    .resultsImg {
+        /* height: 200px; */
+        width: 250px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .resultsImg {
+        /* height: 200px; */
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .resultsImg {
+        display: none;
+    }
+}

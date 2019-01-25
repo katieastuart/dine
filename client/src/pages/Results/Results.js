@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Media, Button } from 'reactstrap';
+import { Media, Button, ListGroup, ListGroupItem } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { MyContext } from '../../App';
 import Nav from "../../components/Nav";
+import "./Results.css"
+import StarRatings from 'react-star-ratings';
 
+var timerId = null;
 
 class Results extends Component {
   state = {
@@ -13,14 +16,19 @@ class Results extends Component {
   };
 
   componentDidMount() {
-    this.loadResults();
+    setTimeout(() =>{
+      this.loadResults();
+    }, 1600)
+  }
+
+  componentWillUnmount() {
+    clearTimeout(timerId);
   }
 
   loadResults = () => {
     API.findAllResults()
       .then(res =>
         this.setState({ restaurants: res.data[0].user_restaurant }, () => {
-          console.log(this.state.restaurants);
         })
       )
       .catch(err => console.log(err));
@@ -60,22 +68,32 @@ class Results extends Component {
             <div>
               <Nav />
               <Container>
+              <ListGroup>
                 {this.state.restaurants.map(restaurant => (
-                  <Media key={restaurant.id}>
-                    <Media left href="#">
-                      <Media object src={restaurant.restaurant_photo_reference} alt={restaurant.restaurant_name} />
-                    </Media>
-                    <Media body>
-                      <Media heading>
-                        {restaurant.restaurant_name}
+                  <ListGroupItem id="listGroupItem">
+                    <Media key={restaurant.id} className="resultsContainer">
+                      <Media left href="#">
+                        <Media className="resultsImg" object src={restaurant.restaurant_photo_reference} alt={restaurant.restaurant_name} />
                       </Media>
-                      <p>Rating: {restaurant.restaurant_rating}</p>
-                      <p>Price level: {this.TransformPriceLevel(restaurant.restaurant_price_level)}</p>
-                      <a href={"https://www.google.com/maps/dir//" + restaurant.restaurant_address} target="_blank"><Button>Directions</Button></a>
-                      <Button onClick={() => { this.favoriteRestaurant(restaurant.id) }}>Favorite</Button>
+                      <Media body>
+                        <Media heading className="resultsTitle">
+                          {restaurant.restaurant_name}
+                        </Media>
+                        <p className="resultRating">Rating: {restaurant.restaurant_rating}</p>
+                        <StarRatings
+                          className="resultRating"
+                          rating={3.2}
+                          starDimension="30px"
+                          starSpacing="15px"
+                        />
+                        <p className="resultPrice">{this.TransformPriceLevel(restaurant.restaurant_price_level)}</p>
+                        <a href={"https://www.google.com/maps/dir//" + restaurant.restaurant_address} target="_blank"><Button className="directionBtn">Directions</Button></a>
+                        <Button className="favoriteBtn" onClick={() => { this.favoriteRestaurant(restaurant.id) }}>Favorite</Button>
+                      </Media>
                     </Media>
-                  </Media>
+                  </ListGroupItem>
                 ))}
+                </ListGroup>
               </Container>
             </div>
           )
