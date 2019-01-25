@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Media, Button, ListGroup, ListGroupItem } from 'reactstrap';
+import { Media, Button, ListGroup, ListGroupItem, Spinner } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import { MyContext } from '../../App';
 import Nav from "../../components/Nav";
@@ -12,16 +12,26 @@ var timerId = null;
 
 class Results extends Component {
   state = {
-    restaurants: []
+    restaurants: [],
+    loadInformation: false
   };
 
   componentDidMount() {
+    this.setState({
+      loadInformation: true
+    })
     setTimeout(() =>{
+      this.setState({
+        loadInformation: false
+      })
       this.loadResults();
     }, 1600)
   }
 
   componentWillUnmount() {
+    this.setState({
+      loadInformation: false
+    })
     clearTimeout(timerId);
   }
 
@@ -62,6 +72,17 @@ class Results extends Component {
         {(context) => {
           if (!context.state.loggedIn) {
             return <Redirect to={{ pathname: "/" }} />
+          }
+
+          if (this.state.loadInformation) {
+            return (
+              <div>
+                <Nav />
+                <div className="spinnerStyles">
+                <Spinner style={{ width: '5rem', height: '5rem' }} color="light" />
+                </div>
+              </div>
+            )
           }
 
           return (
