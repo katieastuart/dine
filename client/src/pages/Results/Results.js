@@ -70,8 +70,8 @@ class Results extends Component {
               <Container>
               <ListGroup>
                 {this.state.restaurants.map(restaurant => (
-                  <ListGroupItem id="listGroupItem">
-                    <Media key={restaurant.id} className="resultsContainer">
+                  <ListGroupItem key={restaurant.id} id="listGroupItem">
+                    <Media className="resultsContainer">
                       <Media left href="#">
                         <Media className="resultsImg" object src={restaurant.restaurant_photo_reference} alt={restaurant.restaurant_name} />
                       </Media>
@@ -79,14 +79,13 @@ class Results extends Component {
                         <Media heading className="resultsTitle">
                           {restaurant.restaurant_name}
                         </Media>
-                        <p className="resultRating">Rating: {restaurant.restaurant_rating}</p>
                         <StarRatings
                           className="resultRating"
-                          rating={3.2}
+                          rating={parseFloat(restaurant.restaurant_rating)}
                           starDimension="30px"
                           starSpacing="15px"
                         />
-                        <p className="resultPrice">{this.TransformPriceLevel(restaurant.restaurant_price_level)}</p>
+                        <div className="resultPrice">{this.TransformPriceLevel(restaurant.restaurant_price_level)}</div>
                         <a href={"https://www.google.com/maps/dir//" + restaurant.restaurant_address} target="_blank"><Button className="directionBtn">Directions</Button></a>
                         <Button className="favoriteBtn" onClick={() => { this.favoriteRestaurant(restaurant.id) }}>Favorite</Button>
                       </Media>
