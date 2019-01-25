@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Card, CardImg, CardBody, Button } from "reactstrap";
+import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, Input, FormGroup } from "reactstrap";
 import Modal from "../../components/Modal";
 import treatSearch from "./treatSearch.json";
 import foodSearch from "./foodSearch.json";
-import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import "react-input-range/lib/css/index.css";
 import InputRange from "react-input-range";
@@ -27,7 +26,7 @@ class Search extends Component {
     // 0 is the most affortable and lowest option.
     minPrice: 0,
     // 4 is the most expensive and the hightest option.
-    maxPrice: 4,
+    maxPrice: 0,
     redirect: false,
     initialQuestions: false,
     modal: false
@@ -154,6 +153,10 @@ class Search extends Component {
                 <Container>
                   <div className="container mainForm">
                     <Label>Distance</Label>
+                    <div className="mainBox">
+                      <div className="boxLeft">1 mile</div>
+                      <div className="boxRight">5 miles</div>
+                    </div>
                     <InputRange
                       className="rangeSlider"
                       step={1000}
@@ -162,7 +165,7 @@ class Search extends Component {
                       value={this.state.distance}
                       onChange={distance => this.setState({ distance })}
                     />
-                    <Label>Min Price</Label>
+                    {/* <Label>Min Price</Label>
 
                     <InputRange
                       className="rangeSlider"
@@ -171,8 +174,12 @@ class Search extends Component {
                       minValue={0}
                       value={this.state.minPrice}
                       onChange={minPrice => this.setState({ minPrice })}
-                    />
-                    <Label>Max Price</Label>
+                    /> */}
+                    <Label>Price</Label>
+                    <div className="mainBox">
+                      <div className="boxLeft">$</div>
+                      <div className="boxRight">$$$$$</div>
+                    </div>
 
                     <InputRange
                       className="rangeSlider"
@@ -223,11 +230,11 @@ class Search extends Component {
                       <FormGroup row>
                         <Col sm={10}>
                           <p>Please select treat or food</p>
-                          <Button onClick={this.setTreatOrFood} value={"treat"}>
+                          <Button className="treatButton" onClick={this.setTreatOrFood} value={"treat"}>
                             treat
                   {/* <img src="../../images/ice-cream.png" /> */}
                           </Button>
-                          <Button onClick={this.setTreatOrFood} value={"food"}>food</Button>
+                          <Button className="foodButton" onClick={this.setTreatOrFood} value={"food"}>food</Button>
                         </Col>
                       </FormGroup>
                     </Form>
@@ -242,11 +249,11 @@ class Search extends Component {
           return (
             <div>
               <Nav />
-              <Container>
+              <Container className="foodCardContainer">
                 <Modal />
                 {
-                  <Card>
-                    <h1 style={{ background: "pink" }} draggable="true">
+                  <Card className="foodCard">
+                    <h1 className="cardHeader" draggable="true">
                       {this.state.searchSelection.name}
                     </h1>
                     <CardImg
@@ -260,13 +267,15 @@ class Search extends Component {
                     />
 
                     <CardBody>
-                      <Button
-                        value={this.state.searchSelection.name}
-                        onClick={this.googleAPICall}
-                      >
-                        Yes
-                    </Button>
-                      <Button onClick={this.incrementIndex}>No</Button>
+                      <Row className="buttonRow">
+                        <div className="centerButtons">
+                          <Button
+                            className="yesButton"
+                            value={this.state.searchSelection.name}
+                            onClick={this.googleAPICall}>Yes</Button>
+                          <Button onClick={this.incrementIndex}>No</Button>
+                        </div>
+                      </Row>
                     </CardBody>
                   </Card>
                 }

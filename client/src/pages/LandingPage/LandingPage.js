@@ -26,19 +26,26 @@ class LandingPage extends Component {
                                     <Col md={4} className="landingPage">
                                         <Link to="/search">
                                             <div className="profileImgSelect">
-                                                <img className="card-img-top" src="https://images.vexels.com/media/users/3/132068/isolated/preview/f9bb81e576c1a361c61a8c08945b2c48-search-icon-by-vexels.png" alt="search"></img>
+                                                <img className="landingPageImage" src="https://static.thenounproject.com/png/14173-200.png"></img>
                                                 <div className="centered imgText">New Search</div>
                                             </div>
                                         </Link>
                                     </Col>
                                     <Col md={4} className="landingPage">
                                         <Link to="/results">
-                                            Results
+                                            <div className="profileImgSelect">
+                                                <img className="landingPageImage" src="https://images.vexels.com/media/users/3/129762/isolated/preview/b8013d3077f62d29bce2664db694246b-check-flat-icon-by-vexels.png"></img>
+                                                <div className="centered imgText">Results</div>
+                                            </div>
                                         </Link>
                                     </Col>
                                     <Col md={4} className="landingPage">
                                         <Link to="/favorites">
-                                            Favorites
+                                            <img className="landingPageImage" src="https://img.icons8.com/metro/1600/hearts.png"></img>
+
+                                            <div className="profileImgSelect">
+                                                <div className="centered imgText">Favorites</div>
+                                            </div>
                                         </Link>
                                     </Col>
                                 </Row>
