@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Aleo');
+
 .landingPage {
-    background:rgba(238, 231, 231, 0.5);
+    /* background:rgba(238, 231, 231, 0.5); */
     padding: 15px;
     border-radius: 15px;
 }
 
 .landingRow {
     margin: 10px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .imgText {
     font-size: 36px;
     font-weight: bold;
 }
+
 
 /* .card-img-top {
     margin-top: 10px;
@@ -20,9 +25,12 @@
 } */
 
 .imgText {
-    font-family: 'Dosis', sans-serif;
-    font-size: 20px;
+    font-family: 'Aleo', serif;
+    font-size: 5rem;
+    line-height: 5.5rem;
+    text-align: center;
     font-weight: bold;
+    color: black;
 }
 
 a {
@@ -49,6 +57,28 @@ a {
 .landingPageImage {
     margin-right: auto;
     margin-right:auto;
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    border-radius: 15px;
+    border: 1px gray solid;
+}
+
+@media only screen and (min-width: 768px) {
+    .imgText {
+        font-size: 2rem;
+        line-height: 2.5rem;
+  }
+  .landingRow {
+    margin-top: 10rem;
+}
+  @media only screen and (min-width: 1024px) {
+    .imgText {
+        font-size: 3rem;
+        line-height: 3.5rem;
+
+  }
+  .landingRow {
+    margin-top: 10rem;
+}   
+}
+
 }

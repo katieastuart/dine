@@ -55,12 +55,25 @@
     margin-right: 10px;
 }
 
+/* Progress Bar */
+.progress {
+   margin-top: 10px;
+}
+
+
+
 @media only screen and (min-width: 768px) {
     .foodCard {
         width: 50%;
         margin-right: auto;
         margin-left: auto;
     }
+    .progress {
+        margin-top: 10px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+     }
     
   }
 
@@ -70,5 +83,10 @@
         margin-right: auto;
         margin-left: auto;
     }
-    
+    .progress {
+        margin-top: 10px;
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+     }
   }

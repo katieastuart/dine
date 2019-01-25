@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
+import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, Progress } from "reactstrap";
 import treatSearch from "./treatSearch.json";
 import foodSearch from "./foodSearch.json";
 import { Redirect } from "react-router-dom";
@@ -25,11 +25,12 @@ class Search extends Component {
     // 0 is the most affortable and lowest option.
     minPrice: 0,
     // 4 is the most expensive and the hightest option.
-    maxPrice: 0,
+    maxPrice: 1,
     redirect: false,
     initialQuestions: false,
     errorModal: false,
-    browserUnsupportedModal: false
+    browserUnsupportedModal: false,
+    progressBarValue: 0
   };
 
   componentDidMount = () => {
@@ -113,12 +114,15 @@ class Search extends Component {
     if (this.state.searchSelection === treatSearch[this.state.index]) {
       this.setState({
         index: this.state.index + 1,
-        searchSelection: treatSearch[this.state.index + 1]
+        searchSelection: treatSearch[this.state.index + 1],
+        progressBarValue: this.state.progressBarValue + 16.66
       });
     } else {
       this.setState({
         index: this.state.index + 1,
-        searchSelection: foodSearch[this.state.index + 1]
+        searchSelection: foodSearch[this.state.index + 1],
+        progressBarValue: this.state.progressBarValue + 16.66
+
       });
     }
   };
@@ -206,14 +210,14 @@ class Search extends Component {
                     <Label>Price</Label>
                     <div className="mainBox">
                       <div className="boxLeft">$</div>
-                      <div className="boxRight">$$$$$</div>
+                      <div className="boxRight">$$$$</div>
                     </div>
 
                     <InputRange
                       className="rangeSlider"
                       step={1}
                       maxValue={4}
-                      minValue={0}
+                      minValue={1}
                       value={this.state.maxPrice}
                       onChange={maxPrice => this.setState({ maxPrice })}
                     />
@@ -266,8 +270,12 @@ class Search extends Component {
                         </div>
                       </Row>
                     </CardBody>
+
                   </Card>
                 }
+                <div>
+                  <Progress animated color="secondary" value={this.state.progressBarValue} />
+                </div>
               </Container>
             </div>
           );
