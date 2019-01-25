@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, Input, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
-import Modal from "../../components/Modal";
+import { Row, Col, Card, CardImg, CardBody, Button, Form, Label, FormGroup, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 import treatSearch from "./treatSearch.json";
 import foodSearch from "./foodSearch.json";
 import { Redirect } from "react-router-dom";
@@ -30,7 +29,7 @@ class Search extends Component {
     redirect: false,
     initialQuestions: false,
     errorModal: false,
-    browserUnsupportedModal: true
+    browserUnsupportedModal: false
   };
 
   componentDidMount = () => {
