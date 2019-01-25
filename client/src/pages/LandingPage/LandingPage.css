@@ -1,6 +1,11 @@
 .landingPage {
-    background-color: whitesmoke;
-    margin: 5px;
+    background:rgba(238, 231, 231, 0.5);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.landingRow {
+    margin: 10px;
 }
 
 .imgText {
@@ -41,3 +46,9 @@ a {
     transform: translate(-50%, -50%);
 }
 
+.landingPageImage {
+    margin-right: auto;
+    margin-right:auto;
+    width: 200px;
+    height: 200px;
+}
